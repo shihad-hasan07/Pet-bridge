@@ -5,6 +5,7 @@ import Dashboard from "../Layout/Dashboard";
 import Errorpage from "../pages/Errorpage";
 import DonationCampaign from "../pages/Donation-campaign/DonationCampaign";
 import PetListing from "../pages/pet-listing/PetListing";
+import Login from "../pages/login/Login";
 
 const allroutes = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const allroutes = createBrowserRouter([
             {
                 path:'/donation-campaigns',
                 element:<DonationCampaign></DonationCampaign>
+            },
+            {
+                path:'/login',
+                element:<Login></Login>
             }
         ]
     },

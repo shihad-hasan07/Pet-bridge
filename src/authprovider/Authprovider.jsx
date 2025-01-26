@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.init";
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import axios from "axios";
 
 export const allContext = createContext()
 
@@ -10,12 +9,10 @@ const Authprovider = ({ routes }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    // create user in firebase
     const signup = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    // and img url and username upon signup
     const addNameImage = (name, image) => {
         return updateProfile(auth.currentUser, {
             displayName: name,
@@ -54,26 +51,26 @@ const Authprovider = ({ routes }) => {
             setLoading(false)
 
             // jwt token related work
-            if (currentuser?.email) {
-                const users = { email: currentuser.email }
+            // if (currentuser?.email) {
+            //     const users = { email: currentuser.email }
 
-                axios.post('https://back-end-part-a11.vercel.app/jwt', users, {
-                    // axios.post('http://localhost:5500/jwt', users, {
-                    withCredentials: true
-                })
-                    .then(res => {
-                        setLoading(false)
-                    })
-            }
-            else {
-                axios.post('https://back-end-part-a11.vercel.app/logout', {}, {
-                    // axios.post('http://localhost:5500/logout', {}, {
-                    withCredentials: true
-                })
-                    .then(res => {
-                        setLoading(false)
-                    })
-            }
+            //     axios.post('https://back-end-part-a11.vercel.app/jwt', users, {
+            //         // axios.post('http://localhost:5500/jwt', users, {
+            //         withCredentials: true
+            //     })
+            //         .then(res => {
+            //             setLoading(false)
+            //         })
+            // }
+            // else {
+            //     axios.post('https://back-end-part-a11.vercel.app/logout', {}, {
+            //         // axios.post('http://localhost:5500/logout', {}, {
+            //         withCredentials: true
+            //     })
+            //         .then(res => {
+            //             setLoading(false)
+            //         })
+            // }
 
             return () => {
                 anyChanges()
@@ -90,11 +87,9 @@ const Authprovider = ({ routes }) => {
         user,
     }
 
-
-
     return (
         <div>
-            <allContext.Provider value={{ 'hi': 'hello' }}>{routes}</allContext.Provider>
+            <allContext.Provider value={contextlist}>{routes}</allContext.Provider>
         </div>
     );
 };
