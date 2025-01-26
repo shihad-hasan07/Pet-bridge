@@ -10,7 +10,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { IoMenuSharp } from 'react-icons/io5';
 
 const Header = () => {
-    const { user,logOut } = useContext(allContext)
+    const { user, logOut } = useContext(allContext)
 
     const [isDarkMode, setIsDarkMode] = useState(true);
     const handleThemeToggle = () => {
@@ -26,7 +26,7 @@ const Header = () => {
     }, [isDarkMode]);
 
     // user logout 
-    const logout=()=>{
+    const logout = () => {
         logOut()
     }
 
@@ -149,8 +149,6 @@ const Header = () => {
                     </div>
                 </div>
             </nav>
-
-
         </div>
     );
 };
