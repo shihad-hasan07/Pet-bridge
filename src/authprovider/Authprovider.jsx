@@ -2,9 +2,9 @@ import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.init";
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
-export const allContext = createContext()
+export const allContext = createContext(null)
 
-const Authprovider = ({ routes }) => {
+const Authprovider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -90,7 +90,7 @@ const Authprovider = ({ routes }) => {
     return (
         <div>
             <allContext.Provider value={contextlist}>
-                {routes}
+                {children}
             </allContext.Provider>
         </div>
     );

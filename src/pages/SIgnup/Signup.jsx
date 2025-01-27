@@ -6,11 +6,13 @@ import { allContext } from '../../authprovider/Authprovider';
 import { toast } from 'react-toastify';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import axios from 'axios';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const hostingKey = import.meta.env.VITE_imgHostingKey;
 const imgHostingApi = `https://api.imgbb.com/1/upload?key=${hostingKey}`
 
 const Signup = () => {
+    const axioxPublic = useAxiosPublic()
     const { signup, updateprofile } = useContext(allContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -18,23 +20,20 @@ const Signup = () => {
     const [error, setError] = useState('')
 
     const onSubmit = async (data) => {
-        const { name, image, email, password, confirmPassword } = data;
 
+        const { name, image, email, password, confirmPassword } = data;
         if (password.length < 6) {
             setError('Password must have atleast 6 character')
             return
         }
-
         if (password !== confirmPassword) {
             setError('Password not matched')
             return
         }
-
         if (!/[A-Z]/.test(password)) {
             setError("Password must contain atleaset 1 uppercase")
             return
         }
-
         if (!/[a-z]/.test(password)) {
             setError("Password must contain atleaset 1 lowercase")
             return
@@ -46,16 +45,28 @@ const Signup = () => {
                 'content-Type': 'multipart/form-data'
             }
         })
-        console.log(res.data.success);
 
         if (res.data.success) {
             const img = res.data.data.display_url;
-            console.log(img);
+
             signup(email, password)
                 .then(res => {
+
                     updateprofile(name, img)
-                    toast.success("Signup Succesfull")
-                    navigate(location?.state ? location.state : '/')
+                        .then(() => {
+                            const userInfo = {
+                                name: name,
+                                email: email,
+                                role: 'user'
+                            }
+                            axioxPublic.post('/create-user', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        toast.success("Signup Succesfull")
+                                        navigate(location?.state ? location.state : '/')
+                                    }
+                                })
+                        })
                 })
                 .catch(error => {
                     if (error.code === "auth/account-exists-with-different-credential") {

@@ -53,9 +53,10 @@ console.log(user);
                                     ? <>
                                         <Menu as="div" className="relative  inline-block text-left">
                                             <div>
-                                                <MenuButton >
+                                                <MenuButton as='div'>
                                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                                                         <img className="w-11 h-11 rounded-full" src={user?.photoURL} alt="user photo" />
+                                                        
                                                     </button>
                                                 </MenuButton>
                                             </div>
@@ -101,7 +102,7 @@ console.log(user);
                         {/* <----------menu icon show only small device------------> */}
                         <Menu as="div" className="relative md:hidden inline-block text-left ml-56">
                             <div>
-                                <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
+                                <MenuButton as='div' className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
                                     <IoMenuSharp />
                                 </MenuButton>
                             </div>

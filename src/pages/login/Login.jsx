@@ -8,20 +8,31 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { allContext } from "../../authprovider/Authprovider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
+    const axioxPublic = useAxiosPublic()
     const { googleLogin, githubLogin } = useContext(allContext)
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
     const location = useLocation()
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
     }
 
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {
+
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    role: 'user'
+                }
+                axioxPublic.post('/create-user', userInfo)
+                    .catch(() => toast.error('Failed to add user in database'))
+
                 toast.success('Succesfully login')
                 navigate(location?.state ? location.state : '/')
             })
@@ -33,6 +44,15 @@ const Login = () => {
     const handleGithubLogin = () => {
         githubLogin()
             .then(res => {
+
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    role: 'user'
+                }
+                axioxPublic.post('/create-user', userInfo)
+                    .catch(() => toast.error('Failed to add user in database'))
+
                 toast.success('Succesfully login')
                 navigate(location?.state ? location.state : '/')
             })

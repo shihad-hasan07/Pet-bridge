@@ -12,12 +12,13 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
 
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      
-      <Authprovider routes={<RouterProvider router={allroutes}></RouterProvider>}>
-      </Authprovider>
+    <Authprovider>
+      <QueryClientProvider client={queryClient}>
 
-      <ToastContainer position="top-center" autoClose={1300} hideProgressBar={false} newestOnTop={false} closeOnClickrtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition:Bounce/>
-    </QueryClientProvider>
-  </StrictMode>,
+        <RouterProvider router={allroutes}></RouterProvider>
+
+      </QueryClientProvider>
+    </Authprovider>
+    <ToastContainer position="top-center" autoClose={1300} hideProgressBar={false} newestOnTop={false} closeOnClickrtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition:Bounce />
+  </StrictMode >,
 )
