@@ -12,7 +12,7 @@ import { IoMenuSharp } from 'react-icons/io5';
 const Header = () => {
     const { user, logOut } = useContext(allContext)
 
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const handleThemeToggle = () => {
         setIsDarkMode((prevMode) => !prevMode);
     };
@@ -29,7 +29,7 @@ const Header = () => {
     const logout = () => {
         logOut()
     }
-
+console.log(user);
     return (
         <div>
             <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -55,24 +55,24 @@ const Header = () => {
                                             <div>
                                                 <MenuButton >
                                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                                                        <img className="w-10 h-10 rounded-full" src="../../public/vite.svg" alt="user photo" />
+                                                        <img className="w-11 h-11 rounded-full" src={user?.photoURL} alt="user photo" />
                                                     </button>
                                                 </MenuButton>
                                             </div>
 
                                             <MenuItems transition
-                                                className="absolute  right-0 z-10 mt-1 w-44 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                                className="absolute  right-0 z-50 mt-1 w-44 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                                                 <div className="py-1">
                                                     <div className="px-4 py-3">
-                                                        <span className="block text-sm text-gray-900 dark:text-white">User Name</span>
+                                                        <span className="block text-sm text-gray-900 dark:text-white overflow-hidden">{user?.displayName}</span>
                                                     </div>
                                                     <hr />
                                                     <MenuItem>
-                                                        <Link to='/dashboard'><button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</button></Link>
+                                                        <Link to='/dashboard'><button className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</button></Link>
                                                     </MenuItem>
                                                     <MenuItem>
                                                         <button onClick={logout}
-                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</button>
+                                                            className="block px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-500 dark:text-gray-200 dark:hover:text-white">Log out</button>
                                                     </MenuItem>
                                                 </div>
                                             </MenuItems>
@@ -85,13 +85,15 @@ const Header = () => {
                                                 login{" "}
                                             </Button>
                                         </Link>
-                                        <Button color="blue" className='px-7 py-3 border-2 border-[#3f83f8] text-sm flex items-center' >
-                                            sign up{" "}
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
-                                                className="h-5 w-5 dark:text-white">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                                            </svg>
-                                        </Button>
+                                        <Link to='/signup'>
+                                            <Button color="blue" className='px-7 py-3 border-2 border-[#3f83f8] text-sm flex items-center' >
+                                                sign up{" "}
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                                                    className="h-5 w-5 dark:text-white">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                                </svg>
+                                            </Button>
+                                        </Link>
                                     </>
                             }
                         </div>
@@ -105,7 +107,7 @@ const Header = () => {
                             </div>
 
                             <MenuItems transition
-                                className="absolute  right-0 z-10 mt-1 w-52 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                className="absolute  right-0 z-40 mt-1 w-52 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                                 <div className="py-1">
                                     <MenuItem>
                                         <NavLink to='/' className={({ isActive }) => isActive ? "block px-4 py-2 text-sm bg-blue-700 text-white"

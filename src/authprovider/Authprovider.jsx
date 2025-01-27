@@ -13,7 +13,7 @@ const Authprovider = ({ routes }) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const addNameImage = (name, image) => {
+    const updateprofile = (name, image) => {
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: image
@@ -80,7 +80,7 @@ const Authprovider = ({ routes }) => {
 
     // set neccesery things to send using context api....
     const contextlist = {
-        signup, login, addNameImage,
+        signup, login, updateprofile,
         googleLogin, githubLogin,
         logOut,
         loading,
@@ -89,7 +89,9 @@ const Authprovider = ({ routes }) => {
 
     return (
         <div>
-            <allContext.Provider value={contextlist}>{routes}</allContext.Provider>
+            <allContext.Provider value={contextlist}>
+                {routes}
+            </allContext.Provider>
         </div>
     );
 };

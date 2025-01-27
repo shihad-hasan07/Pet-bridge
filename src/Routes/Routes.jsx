@@ -6,6 +6,8 @@ import Errorpage from "../pages/Errorpage";
 import DonationCampaign from "../pages/Donation-campaign/DonationCampaign";
 import PetListing from "../pages/pet-listing/PetListing";
 import Login from "../pages/login/Login";
+import Signup from "../pages/SIgnup/Signup";
+import PetDetails from "../components/PetDetails";
 
 const allroutes = createBrowserRouter([
     {
@@ -18,16 +20,24 @@ const allroutes = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path:'/pet-listing',
-                element:<PetListing></PetListing>
+                path: '/pet-listing',
+                element: <PetListing></PetListing>
             },
             {
-                path:'/donation-campaigns',
-                element:<DonationCampaign></DonationCampaign>
+                path: `/pet/details/:id`,
+                element: <PetDetails></PetDetails>
             },
             {
-                path:'/login',
-                element:<Login></Login>
+                path: '/donation-campaigns',
+                element: <DonationCampaign></DonationCampaign>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/signup',
+                element: <Signup></Signup>
             }
         ]
     },

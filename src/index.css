@@ -14,3 +14,28 @@
             transparent 240px);
     background-color: orange;
 }
+
+.btttn {
+    border: 2px solid #2196f3;
+    background-color: #2196f3;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 40px;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    align-items: center;
+}
+
+/* .btttn>span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+} */
+
+.btttn:hover {
+    background-color: #0071e2;
+}

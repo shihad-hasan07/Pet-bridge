@@ -1,0 +1,32 @@
+.custom-tab-list {
+    width: 80%;
+
+    /* justify-content: space-around;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px; */
+}
+
+.custom-tab {
+    padding: 14px 50px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    font-size: 18px;
+}
+
+
+.custom-tab--active {
+    background-color: #212ff3;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #4caf50;
+}
+
+/* .custom-tab:not(.custom-tab--active) {
+    background-color: #f9f9f9;
+    color: #555;
+} */
