@@ -14,6 +14,10 @@ import Dash_MyAddedPet from "../pages/Dashboard/Dash_MyAddedPet";
 import Dash_CreateDonation from "../pages/Dashboard/Dash_CreateDonation";
 import Dash_MyDonationCampaign from "../pages/Dashboard/Dash_MyDonationCampaign";
 import Dash_MyDonation from "../pages/Dashboard/Dash_MyDonation";
+import PrivateRoute from "./PrivateRoute";
+import Admin_all_users from "../pages/Dashboard/Admin_all_users";
+import Admin_All_Pets from "../pages/Dashboard/Admin_All_Pets";
+import Admin_All_Donations from "../pages/Dashboard/Admin_All_Donations";
 
 const allroutes = createBrowserRouter([
     {
@@ -48,35 +52,58 @@ const allroutes = createBrowserRouter([
         ]
     },
 
-    // user dashboard
+    //  dashboard
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
-        errorElement:<Errorpage></Errorpage>,
-        children:[
+        element: <PrivateRoute>
+            <Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <Errorpage></Errorpage>,
+        children: [
+
+            // dashboard only for -----> ( admin )-------------------->
             {
-                path:'/dashboard/addPet',
-                element:<Dash_Addpet></Dash_Addpet>
+                path: '/dashboard/admin/all-users',
+                element: <Admin_all_users></Admin_all_users>
             },
             {
-                path:'/dashboard/my-added-pets',
-                element:<Dash_MyAddedPet></Dash_MyAddedPet>
+                path:'/dashboard/admin/all-pets',
+                element:<Admin_All_Pets></Admin_All_Pets>
             },
             {
-                path:'/dashboard/adoption-request',
-                element:<Dash_AoptionRequest></Dash_AoptionRequest> 
+                path:'/dashboard/admin/all-donations',
+                element:<Admin_All_Donations></Admin_All_Donations>
+            },
+
+            // dashboard for -----> ( user and admin both )----------------------->
+            {
+                path: '/dashboard/addPet',
+                element: <PrivateRoute>
+                    <Dash_Addpet></Dash_Addpet></PrivateRoute>
             },
             {
-                path:'/dashboard/create-donation-campaign',
-                element:<Dash_CreateDonation></Dash_CreateDonation>
+                path: '/dashboard/my-added-pets',
+                element: <PrivateRoute>
+                    <Dash_MyAddedPet></Dash_MyAddedPet></PrivateRoute>
             },
             {
-                path:'/dashboard/my-donation-campaign',
-                element:<Dash_MyDonationCampaign></Dash_MyDonationCampaign>
+                path: '/dashboard/adoption-request',
+                element: <PrivateRoute>
+                    <Dash_AoptionRequest></Dash_AoptionRequest></PrivateRoute>
             },
             {
-                path:'/dashboard/my-donation',
-                element:<Dash_MyDonation></Dash_MyDonation>
+                path: '/dashboard/create-donation-campaign',
+                element: <PrivateRoute>
+                    <Dash_CreateDonation></Dash_CreateDonation></PrivateRoute>
+            },
+            {
+                path: '/dashboard/my-donation-campaign',
+                element: <PrivateRoute>
+                    <Dash_MyDonationCampaign></Dash_MyDonationCampaign></PrivateRoute>
+            },
+            {
+                path: '/dashboard/my-donation',
+                element: <PrivateRoute>
+                    <Dash_MyDonation></Dash_MyDonation></PrivateRoute>
             }
         ]
     }

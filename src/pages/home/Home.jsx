@@ -15,7 +15,7 @@ const Home = () => {
         const man = {
             "_id": 4,
             "category": 'Cat',
-            "image": "/public/rabbit.jpg",
+            "image": "/rabbit.jpg",
             "name": 'd o g saheb',
             "age": 2,
             "location": "kuttapara"

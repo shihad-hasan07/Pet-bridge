@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
