@@ -60,21 +60,21 @@ const allroutes = createBrowserRouter([
         errorElement: <Errorpage></Errorpage>,
         children: [
 
-            // dashboard only for -----> ( admin )-------------------->
+            // dashboard only for --> admin 
             {
                 path: '/dashboard/admin/all-users',
                 element: <Admin_all_users></Admin_all_users>
             },
             {
-                path:'/dashboard/admin/all-pets',
-                element:<Admin_All_Pets></Admin_All_Pets>
+                path: '/dashboard/admin/all-pets',
+                element: <Admin_All_Pets></Admin_All_Pets>
             },
             {
-                path:'/dashboard/admin/all-donations',
-                element:<Admin_All_Donations></Admin_All_Donations>
+                path: '/dashboard/admin/all-donations',
+                element: <Admin_All_Donations></Admin_All_Donations>
             },
 
-            // dashboard for -----> ( user and admin both )----------------------->
+            // dashboard for --> user and admin both 
             {
                 path: '/dashboard/addPet',
                 element: <PrivateRoute>

@@ -5,25 +5,10 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
-import PetCategory from '../../components/HomeComponents/PetCategory';
-import axios from 'axios';
 
 const Home = () => {
 
-    const hi = () => {
-
-        const man = {
-            "_id": 4,
-            "category": 'Cat',
-            "image": "/rabbit.jpg",
-            "name": 'd o g saheb',
-            "age": 2,
-            "location": "kuttapara"
-        }
-        axios.post('http://localhost:5000/add-pet', man)
-            .then(res => console.log('response', res.data))
-            .catch(err => console.log(err))
-    }
+    
     return (
         <div>
 
@@ -59,14 +44,12 @@ const Home = () => {
 
             {/* <----------------pets category section------------> */}
             <section className='bg-gray-100'>
-                <div className=''>
-                    <PetCategory></PetCategory>
-                </div>
+
             </section>
 
             {/* <------------------------call to action section-----------------> */}
             <div>
-                <button onClick={hi} className='text-7xl'>Post</button>
+
             </div>
 
         </div>

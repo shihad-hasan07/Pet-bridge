@@ -91,15 +91,6 @@ const Signup = () => {
                     <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required />
                 </div>
 
-
-                {/* demo */}
-                <div className='mt-5'>
-                    <Input {...register("image")} size="lg" type="file" color="purple" label="Select Profile picture" required
-                        className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
-                    {/* <input type="file" class="w-full text-gray-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" /> */}
-
-                </div>
-                {/* demo */}
                 <div className='mt-5'>
                     <Input {...register("email")} size="lg" type="email" color="purple" label="Email" required />
                 </div>
