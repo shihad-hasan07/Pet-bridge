@@ -29,7 +29,6 @@ const Header = () => {
     const logout = () => {
         logOut()
     }
-console.log(user);
     return (
         <div>
             <nav className="bg-white border-gray-200 dark:bg-gray-900">

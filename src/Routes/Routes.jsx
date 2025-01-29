@@ -18,6 +18,7 @@ import PrivateRoute from "./PrivateRoute";
 import Admin_all_users from "../pages/Dashboard/Admin_all_users";
 import Admin_All_Pets from "../pages/Dashboard/Admin_All_Pets";
 import Admin_All_Donations from "../pages/Dashboard/Admin_All_Donations";
+import Dash_UpdatePet from "../pages/Dashboard/Dash_UpdatePet";
 
 const allroutes = createBrowserRouter([
     {
@@ -79,6 +80,11 @@ const allroutes = createBrowserRouter([
                 path: '/dashboard/addPet',
                 element: <PrivateRoute>
                     <Dash_Addpet></Dash_Addpet></PrivateRoute>
+            },
+            {
+                path: `/dashboard/update-pet/:id`,
+                element: <PrivateRoute>
+                    <Dash_UpdatePet></Dash_UpdatePet></PrivateRoute>
             },
             {
                 path: '/dashboard/my-added-pets',

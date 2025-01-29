@@ -1,3 +1,6 @@
+import React from 'react';
+import useMyaddedpet from '../../hooks/useMyaddedpet';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Textarea, Typography } from '@material-tailwind/react';
 import Select from 'react-select';
@@ -5,8 +8,7 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useNavigate } from 'react-router-dom';
-import { allContext } from '../../authprovider/Authprovider';
+
 
 const customStyles = {
     control: (provided) => ({
@@ -43,25 +45,30 @@ const category = [
 const hostingKey = import.meta.env.VITE_imgHostingKey;
 const imgHostingApi = `https://api.imgbb.com/1/upload?key=${hostingKey}`
 
-
-const Dash_Addpet = () => {
-    const { register, handleSubmit } = useForm()
-    const { user } = useContext(allContext)
-    const [categrie, setCategory] = useState(null)
-    const axiosSecure = useAxiosSecure()
+// main function starts from here.......
+const Dash_UpdatePet = () => {
+    const params = useParams()
+    const { myAddedpets } = useMyaddedpet()
+    const updatePet = myAddedpets.find(data => data._id === params.id)
     const navigate = useNavigate()
-    
-    // addition security --- to avoid adding multiple click to add data
-    const [isPetExist, setisPetExist] = useState({})
+    const axiosSecure = useAxiosSecure()
+    const defaultCategory = category.find(d => d.value == updatePet?.category)
+    const [categrie, setCategory] = useState(defaultCategory)
 
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            name: updatePet?.name,
+            age: updatePet?.age,
+            location: updatePet?.location,
+            sortDescription: updatePet?.sortDescription,
+            fullDesciption: updatePet?.fullDesciption,
+        },
+    });
+
+
+    // onsubmit function
     const onSubmit = async (data) => {
-
-        // additional checking --- to avoid adding multiple click to add data
-        setisPetExist(data)
-        if(isPetExist?.name){
-            return toast.error('Pet data just added')
-        }
-
+        console.log('category', categrie.value);
         const imgFile = { image: data.image[0] }
         const res = await axios.post(imgHostingApi, imgFile, {
             headers: {
@@ -70,9 +77,9 @@ const Dash_Addpet = () => {
         })
         if (res.data.success) {
             const image = res.data.data.display_url
-            console.log('imge name',res.data.data);
+            console.log('imge name', res.data.data);
             const petAddTime = new Date().toLocaleString();
-            const petInfo = {
+            const updatedPetInfo = {
                 name: data.name,
                 image: image,
                 age: data.age,
@@ -81,36 +88,36 @@ const Dash_Addpet = () => {
                 sortDescription: data.sortDescription,
                 fullDesciption: data.fullDesciption,
                 petAddTime: petAddTime,
-                adopted: false,
-                petOwner: user.email
             }
 
-            axiosSecure.post('/add-pet', petInfo)
+            axiosSecure.patch(`/update/pet/${params.id}`, updatedPetInfo)
                 .then(res => {
-                    if (res.data.insertedId) {
-                        toast.success('Pet added')
+                    if (res.data) {
+                        toast.success('Pet Updated')
                         navigate('/dashboard/my-added-pets')
                     }
                 })
                 .catch(() => {
-                    toast.error('Failed to add a pet')
+                    toast.error('Failed to update')
                 })
         } else {
-            toast.error('Failed to add')
+            toast.error('Failed to update')
         }
     }
 
-
     return (
-        <div className='bg-gray-200 min-h-[calc(100vh-60px)]'>
-            <p className='bg-white py-4 shadow-sm px-7 tracking-wider font-semibold  text-xl flex items-center'>Add Pet</p>
+        <div className="bg-gray-200 min-h-[calc(100vh-60px)]">
+            <p className="bg-white py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center">
+                Update pet info...
+            </p>
 
             <div className='w-96 mx-auto'>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className='mt-10'>
-                        <Input {...register("image")} size="lg" type="file" color="purple" label="Select Profile picture" required
+                        <Input {...register("image")} size="lg" type="file" color="purple" label='Add a img' required
                             className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
+                        {/* <p>{ updatePet?.image.split('/').pop()}</p> */}
                     </div>
 
                     <div className='mt-7'>
@@ -122,7 +129,7 @@ const Dash_Addpet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Select isClearable options={category} onChange={(d) => setCategory(d)} placeholder="Select the category*" styles={customStyles} required />
+                        <Select isClearable options={category} defaultValue={categrie} onChange={(d) => setCategory(d)} placeholder="Select the category*" styles={customStyles} required />
                     </div>
 
                     <div className='mt-7'>
@@ -139,11 +146,11 @@ const Dash_Addpet = () => {
 
                     <br />
                     <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                        Submit</Button></button>
+                        Update</Button></button>
                 </form>
             </div>
         </div>
     );
 };
 
-export default Dash_Addpet;
+export default Dash_UpdatePet;

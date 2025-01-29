@@ -72,7 +72,6 @@ const Signup = () => {
                     if (error.code === "auth/account-exists-with-different-credential") {
                         toast.error('Please enter valid info')
                     } else {
-                        console.log('error is', error);
                         toast.error('Signup failed')
                     }
                 })

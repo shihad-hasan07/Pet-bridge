@@ -1,27 +1,23 @@
 import React, { useContext } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { FaRegEdit, } from 'react-icons/fa';
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { Button } from '@material-tailwind/react';
 import Swal from 'sweetalert2';
-import { allContext } from '../../authprovider/Authprovider';
+import useMyaddedpet from '../../hooks/useMyaddedpet';
+import { useNavigate } from 'react-router-dom';
 
 const Dash_MyAddedPet = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useContext(allContext)
+    const navigate=useNavigate()
+    const {myAddedpets,refetch,isLoading}=useMyaddedpet()
 
-    const { data: myAddedpets = [], refetch, isLoading, isError, error } = useQuery({
-        queryKey: ['myAddedpets', user?.email],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/my-added-pets?email=${user.email}`);
-            return res.data;
-        }
-    });
+    const handleUpdate=(id)=>{
+        navigate(`/dashboard/update-pet/${id}`)
+    }
 
     const makedopted = (id) => {
-        console.log('adopted', id)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -50,7 +46,6 @@ const Dash_MyAddedPet = () => {
     }
 
     const handleDelete = (id) => {
-        console.log(id)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -65,7 +60,6 @@ const Dash_MyAddedPet = () => {
                 // update adopted info
                 axiosSecure.delete(`/my-added-pets/${id}`)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.deletedCount > 0) {
                             refetch()
                             Swal.fire({
@@ -128,6 +122,7 @@ const Dash_MyAddedPet = () => {
                 cell: ({ row }) => (
                     <div >
                         <button
+                        onClick={()=>handleUpdate(row.original._id)}
                             className="text-blue-600 ml-4 hover:text-blue-800"
                         ><FaRegEdit></FaRegEdit>
                         </button>
@@ -164,7 +159,6 @@ const Dash_MyAddedPet = () => {
         []
     );
 
-    console.log(myAddedpets);
     const table = useReactTable({
         data: myAddedpets,
         columns,
@@ -174,7 +168,7 @@ const Dash_MyAddedPet = () => {
     return (
         <div className="bg-gray-200 min-h-[calc(100vh-60px)]">
             <p className="bg-white py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center">
-                My Added Pets
+                My Added Pets <span className='ml-2'>({myAddedpets?.length})</span>
             </p>
 
             <div className="p-4">
