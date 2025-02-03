@@ -55,6 +55,8 @@ const Dash_UpdatePet = () => {
     const defaultCategory = category.find(d => d.value == updatePet?.category)
     const [categrie, setCategory] = useState(defaultCategory)
 
+    const [loadding,setloadding]=useState(false)
+
     const { register, handleSubmit } = useForm({
         defaultValues: {
             name: updatePet?.name,
@@ -68,6 +70,7 @@ const Dash_UpdatePet = () => {
 
     // onsubmit function
     const onSubmit = async (data) => {
+        setloadding(true)
         console.log('category', categrie.value);
         const imgFile = { image: data.image[0] }
         const res = await axios.post(imgHostingApi, imgFile, {
@@ -93,6 +96,7 @@ const Dash_UpdatePet = () => {
             axiosSecure.patch(`/update/pet/${params.id}`, updatedPetInfo)
                 .then(res => {
                     if (res.data) {
+                        setloadding(false)
                         toast.success('Pet Updated')
                         navigate('/dashboard/my-added-pets')
                     }
@@ -113,7 +117,6 @@ const Dash_UpdatePet = () => {
 
             <div className='w-96 mx-auto'>
                 <form onSubmit={handleSubmit(onSubmit)}>
-
                     <div className='mt-10'>
                         <Input {...register("image")} size="lg" type="file" color="purple" label='Add a img' required
                             className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
@@ -146,7 +149,7 @@ const Dash_UpdatePet = () => {
 
                     <br />
                     <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                        Update</Button></button>
+                       {loadding?"Updating...":"Update"} </Button></button>
                 </form>
             </div>
         </div>

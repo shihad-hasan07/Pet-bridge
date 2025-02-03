@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { allContext } from '../authprovider/Authprovider';
-import useAxiosPublic from '../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AdminRoute = ({ children }) => {
     const { user, loading } = useContext(allContext)
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { data: isAdmin, isLoading: isAdminloading } = useQuery({
         queryKey: [user?.email, 'isAdmin'],
 
         queryFn:async ()=>{
-            const res=await axiosPublic.get(`user`)
+            const res=await axiosSecure.get(`user`)
         }
     })
 

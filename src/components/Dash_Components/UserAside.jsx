@@ -76,12 +76,6 @@ const UserAside = () => {
                         My added pets</button>
                 </NavLink>
 
-                <NavLink to='/dashboard/adoption-request' className={({ isActive }) => isActive ? 'transition-all duration-300 flex items-center bg-blue-900 text-white py-3 rounded-md pl-7 gap-3 w-full text-left mt-2'
-                    : ' flex bg-none text-gray-300 gap-3 w-full pl-4 text-left mt-2 hover:bg-[#1a245f] py-3 rounded-md'}>
-                    <LuGitPullRequest /><button>
-                        Adoption Request</button>
-                </NavLink>
-
                 <NavLink to='/dashboard/create-donation-campaign' className={({ isActive }) => isActive ? 'transition-all duration-300 flex items-center bg-blue-900 text-white py-3 rounded-md pl-7 gap-3 w-full text-left mt-2'
                     : 'flex bg-none text-gray-300 gap-3 w-full pl-4 text-left mt-2 hover:bg-[#1a245f] py-3 rounded-md'}>
                     <MdOutlineCampaign /><button>
@@ -98,6 +92,12 @@ const UserAside = () => {
                     : 'flex bg-none text-gray-300 gap-3 w-full pl-4 text-left mt-2 hover:bg-[#1a245f] py-3 rounded-md'}>
                     <LiaDonateSolid /><button>
                         My donation</button>
+                </NavLink>
+
+                <NavLink to='/dashboard/adoption-request' className={({ isActive }) => isActive ? 'transition-all duration-300 flex items-center bg-blue-900 text-white py-3 rounded-md pl-7 gap-3 w-full text-left mt-2'
+                    : ' flex bg-none text-gray-300 gap-3 w-full pl-4 text-left mt-2 hover:bg-[#1a245f] py-3 rounded-md'}>
+                    <LuGitPullRequest /><button>
+                        Adoption Request</button>
                 </NavLink>
             </div>
         </aside >

@@ -10,7 +10,7 @@ const PetCard = ({ details }) => {
         <Card className="max-w-sm rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-200">
             <div className="">
                 <img src={image} alt={`${name} image`}
-                    className="w-full h-48 object-cover rounded-t-2xl" />
+                    className="w-full h-60 object-cover rounded-t-2xl" />
             </div>
 
             <CardBody className="p-4 rounded-t-[30%]  -mt-8 z-20  bg-white border-t">
@@ -24,7 +24,7 @@ const PetCard = ({ details }) => {
                 <div className="flex items-center justify-center text-gray-600">
                     <FaMapMarkerAlt size={15} className="mr-1" />
                     <Typography color="gray" className="text-sm">
-                        {location}
+                        Location : {location}
                     </Typography>
                 </div>
             </CardBody>
