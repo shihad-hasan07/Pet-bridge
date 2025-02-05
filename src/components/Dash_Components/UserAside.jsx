@@ -6,13 +6,10 @@ import { TbBrandCampaignmonitor } from 'react-icons/tb';
 import { LiaDonateSolid } from 'react-icons/lia'
 import { IoHomeOutline } from 'react-icons/io5';
 import asideBg from '../../assets/bg1.jpeg'
-import { allContext } from '../../authprovider/Authprovider';
 import { IoMdAddCircleOutline } from 'react-icons/io';
-import { PiUsersThree } from 'react-icons/pi';
 import { FaDonate, FaUsers } from 'react-icons/fa';
 
-const UserAside = () => {
-    const { user } = useContext(allContext)
+const UserAside = ({user}) => {
 
     const role = "admin";
 

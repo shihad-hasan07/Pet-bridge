@@ -18,7 +18,6 @@ const PetDetails = () => {
     if (isError) return <p>Error: {error.message}</p>;
     const { adopted, age, category, fullDesciption, image, location, name, petAddTime, petOwner, sortDescription, _id } = details
 
-    console.log(details);
     return (
         <div className=" p-20">
 
@@ -38,7 +37,7 @@ const PetDetails = () => {
                     <p className="text-xl my-3">{category} | <span>{location}</span></p>
                     <p>{sortDescription} </p>
                     <div className="w-full my-5 h-[2px] bg-gray-600"></div>
-                    <h3 className="text-2xl font-medium">About ---> {name}</h3>
+                    <h3 className="text-2xl font-medium">About --- {name}</h3>
                     <p className="mt-4 text-xl">Age : {age} days</p>
                     <p className="mt-2 text-xl">Desciption : <span className="text-base">{fullDesciption}</span> </p>
 

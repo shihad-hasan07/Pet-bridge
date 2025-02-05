@@ -70,7 +70,6 @@ const Dash_Addpet = () => {
         })
         if (res.data.success) {
             const image = res.data.data.display_url
-            console.log('imge name',res.data.data);
             const petAddTime = new Date().toLocaleString();
             const petInfo = {
                 name: data.name,

@@ -13,7 +13,6 @@ const PetListing = () => {
             return notadopted
         }
     })
-    console.log(allpets);
     
     return (
         <div className='bg-gray-200 dark:bg-[#3c0040]'>

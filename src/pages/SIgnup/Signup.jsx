@@ -5,23 +5,22 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { allContext } from '../../authprovider/Authprovider';
 import { toast } from 'react-toastify';
 import { IoAlertCircleOutline } from 'react-icons/io5';
-import axios from 'axios';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 
-const hostingKey = import.meta.env.VITE_imgHostingKey;
-const imgHostingApi = `https://api.imgbb.com/1/upload?key=${hostingKey}`
+import defaultProfileImg from '../../assets/defaultProfiepicture.png'
+
 
 const Signup = () => {
-    const axioxPublic = useAxiosPublic()
     const { signup, updateprofile } = useContext(allContext)
     const navigate = useNavigate()
     const location = useLocation()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
+    const axioxPublic = useAxiosPublic()
 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
 
-        const { name, image, email, password, confirmPassword } = data;
+        const { name, email, password, confirmPassword } = data;
         if (password.length < 6) {
             setError('Password must have atleast 6 character')
             return
@@ -38,47 +37,25 @@ const Signup = () => {
             setError("Password must contain atleaset 1 lowercase")
             return
         }
+        setError('')
 
-        const imgFile = { image: image[0] }
-        const res = await axios.post(imgHostingApi, imgFile, {
-            headers: {
-                'content-Type': 'multipart/form-data'
-            }
-        })
+        signup(email, password)
+            .then(res => {
+                updateprofile(name, defaultProfileImg)
+                    .then(() => {
+                        const userInfo = {
+                            name: res.user.displayName,
+                            email: res.user.email,
+                            role: 'user'
+                        }
+                        axioxPublic.post('/create-user', userInfo)
+                            .catch(() => toast.error('Failed to add user in database'))
 
-        if (res.data.success) {
-            const img = res.data.data.display_url;
-
-            signup(email, password)
-                .then(res => {
-
-                    updateprofile(name, img)
-                        .then(() => {
-                            const userInfo = {
-                                name: name,
-                                email: email,
-                                role: 'user'
-                            }
-                            axioxPublic.post('/create-user', userInfo)
-                                .then(res => {
-                                    if (res.data.insertedId) {
-                                        toast.success("Signup Succesfull")
-                                        navigate(location?.state ? location.state : '/')
-                                    }
-                                })
-                        })
-                })
-                .catch(error => {
-                    if (error.code === "auth/account-exists-with-different-credential") {
-                        toast.error('Please enter valid info')
-                    } else {
-                        toast.error('Signup failed')
-                    }
-                })
-        }
-        else {
-            toast.error('Signup fasdfsdfsdiled')
-        }
+                        navigate(location?.state ? location.state : '/')
+                        toast.success('signup succesfull')
+                    })
+            })
+            .catch(err => toast.error('Sign up failed'))
     }
 
     return (
@@ -106,7 +83,7 @@ const Signup = () => {
                 </div>
 
                 <div>
-                    <button type='submit' className="btttn w-full mt-5">Login</button>
+                    <button type='submit' className="btttn w-full mt-5">Sign up</button>
                 </div>
 
                 <div className="flex items-center px-3 w-full mt-5 max-w-md">

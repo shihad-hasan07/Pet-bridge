@@ -12,13 +12,18 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
     const axioxPublic = useAxiosPublic()
-    const { googleLogin, githubLogin } = useContext(allContext)
+    const { googleLogin, githubLogin, login } = useContext(allContext)
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
     const location = useLocation()
 
     const onSubmit = (data) => {
-        // console.log(data)
+        login(data?.email, data?.password)
+            .then(res => {
+                toast.success('Succesfull login')
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(err => toast.error('Something wrong happen'))
     }
 
     const handleGoogleLogin = () => {
@@ -38,7 +43,6 @@ const Login = () => {
             })
             .catch(error => {
                 toast.error('Login failed')
-                console.log(error)
             })
     }
     const handleGithubLogin = () => {
@@ -75,11 +79,11 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="w-96 p-5 mx-auto rounded-xl ">
 
                 <div>
-                    <Input {...register("email")} size="lg" type="email" color="purple" label="Email" />
+                    <Input {...register("email")} size="lg" type="email" color="purple" label="Email" required />
                 </div>
 
                 <div className="mt-5">
-                    <Input {...register("password")} size="lg" type="password" color="purple" label="Password" />
+                    <Input {...register("password")} size="lg" type="password" color="purple" label="Password" required />
                 </div>
 
                 <div>

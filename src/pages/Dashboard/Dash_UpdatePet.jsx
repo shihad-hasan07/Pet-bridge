@@ -71,7 +71,6 @@ const Dash_UpdatePet = () => {
     // onsubmit function
     const onSubmit = async (data) => {
         setloadding(true)
-        console.log('category', categrie.value);
         const imgFile = { image: data.image[0] }
         const res = await axios.post(imgHostingApi, imgFile, {
             headers: {
@@ -80,7 +79,6 @@ const Dash_UpdatePet = () => {
         })
         if (res.data.success) {
             const image = res.data.data.display_url
-            console.log('imge name', res.data.data);
             const petAddTime = new Date().toLocaleString();
             const updatedPetInfo = {
                 name: data.name,

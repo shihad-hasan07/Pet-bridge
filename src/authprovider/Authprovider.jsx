@@ -49,29 +49,7 @@ const Authprovider = ({ children }) => {
         const anyChanges = onAuthStateChanged(auth, currentuser => {
             currentuser ? setUser(currentuser) : setUser(null)
             setLoading(false)
-
-            // jwt token related work
-            // if (currentuser?.email) {
-            //     const users = { email: currentuser.email }
-
-            //     axios.post('https://back-end-part-a11.vercel.app/jwt', users, {
-            //         // axios.post('http://localhost:5500/jwt', users, {
-            //         withCredentials: true
-            //     })
-            //         .then(res => {
-            //             setLoading(false)
-            //         })
-            // }
-            // else {
-            //     axios.post('https://back-end-part-a11.vercel.app/logout', {}, {
-            //         // axios.post('http://localhost:5500/logout', {}, {
-            //         withCredentials: true
-            //     })
-            //         .then(res => {
-            //             setLoading(false)
-            //         })
-            // }
-
+            
             return () => {
                 anyChanges()
             }

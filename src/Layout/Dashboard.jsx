@@ -14,7 +14,7 @@ const Dashboard = () => {
     return (
         <div className='flex items-stretch'>
             <div className='min-h-screen' style={{ backgroundImage: `url(${asideBg})` }}>
-                <UserAside></UserAside>
+                <UserAside user={user} ></UserAside>
             </div>
 
             <div className='flex-grow '>
