@@ -57,15 +57,7 @@ const Dash_UpdatePet = () => {
 
     const [loadding,setloadding]=useState(false)
 
-    const { register, handleSubmit } = useForm({
-        defaultValues: {
-            name: updatePet?.name,
-            age: updatePet?.age,
-            location: updatePet?.location,
-            sortDescription: updatePet?.sortDescription,
-            fullDesciption: updatePet?.fullDesciption,
-        },
-    });
+    const { register, handleSubmit } = useForm();
 
 
     // onsubmit function
@@ -122,11 +114,11 @@ const Dash_UpdatePet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required />
+                        <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required defaultValue={updatePet?.name}/>
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("age")} size="lg" type="number" min={1} color="purple" label="Age" required />
+                        <Input {...register("age")} size="lg" type="number" min={1} color="purple" label="Age" required defaultValue={updatePet?.age} />
                     </div>
 
                     <div className='mt-7'>
@@ -134,15 +126,15 @@ const Dash_UpdatePet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("location")} size="lg" type="text" color="purple" label="Location" required />
+                        <Input {...register("location")} size="lg" type="text" color="purple" label="Location" required defaultValue={updatePet?.location}/>
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required />
+                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required defaultValue={updatePet?.sortDescription}/>
                     </div>
 
                     <div className='mt-7'>
-                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required />
+                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required defaultValue={updatePet?.fullDesciption}/>
                     </div>
 
                     <br />

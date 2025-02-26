@@ -109,6 +109,7 @@ const Dash_Addpet = () => {
 
                     <div className='mt-10'>
                         <Input {...register("image")} size="lg" type="file" color="purple" label="Select Profile picture" required
+                         accept="image/*" 
                             className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
                     </div>
 

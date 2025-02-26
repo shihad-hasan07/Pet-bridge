@@ -4,48 +4,64 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { allContext } from '../../authprovider/Authprovider';
+import { useNavigate, useParams } from 'react-router-dom';
+import useDonationCampagin from '../../hooks/useDonationCampagin';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useNavigate } from 'react-router-dom';
-
 const hostingKey = import.meta.env.VITE_imgHostingKey;
 const imgHostingApi = `https://api.imgbb.com/1/upload?key=${hostingKey}`
 
-const Dash_CreateDonation = () => {
-    const date = new Date()
+const Dash_Update_Campaign = () => {
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
+    const params = useParams()
+    const { myDonationCampaign } = useDonationCampagin()
+    const editCampaign = myDonationCampaign.find(data => data._id === params.id)
+
+    const date = new Date()
     const { user } = useContext(allContext)
-    const { register, handleSubmit } = useForm()
     const currentDate = date.toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
     const [createLoading, setCreateLoading] = useState(false)
-    const navigate=useNavigate()
 
-    const onSubmit = async (data) => {
-        setCreateLoading(true)
-        const imgFile = { image: data.image[0] }
-        const res = await axios.post(imgHostingApi, imgFile, {
-            headers: {
-                'content-Type': 'multipart/form-data'
-            }
-        })
-        if (res.data.success) {
-            const display_url = res.data.data.display_url
-            const campaignCreatedTime = new Date().toLocaleString();
-            const campaignData = { ...data, image: display_url, campaignCreatedTime: campaignCreatedTime, campaignOwner: user?.email,totalDonation:0 }
 
-            axiosSecure.post('/donation-campaign', campaignData)
-                .then(res => {
-                    if (res.data.insertedId) {
-                        setCreateLoading(false)
-                        toast.success('Succesfully added')
-                        navigate('/dashboard/my-donation-campaign')
-                    } else {
-                        toast.error('failed to add')
-                    }
-                })
-
-        } else {
-            toast.error('Failed to add')
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            name: editCampaign?.name,
+            maxDonationAmount: editCampaign?.maxDonationAmount,
+            lastDateofDonation: editCampaign?.lastDateofDonation,
+            sortDescription: editCampaign?.sortDescription,
+            fullDesciption: editCampaign?.fullDesciption
         }
+    })
+    const onSubmit = async (data) => {
+
+        let picture = editCampaign?.image
+        const imgFile = { image: data.image[0] }
+
+        // if image exist then upload the image to imgbb 
+        if (imgFile?.image?.name) {
+            const res = await axios.post(imgHostingApi, imgFile, {
+                headers: { 'content-Type': 'multipart/form-data' }
+            })
+            if (res.data.success) {
+                const display_url = res.data.data.display_url
+                picture = display_url
+            } else {
+                toast.error('Failed to add')
+            }
+        }
+
+        const campaignCreatedTime = new Date().toLocaleString();
+        const updatedData = { ...data, image: picture, campaignOwner: user.email, campaignCreatedTime: campaignCreatedTime }
+        axiosSecure.patch(`/donation-campaign/${params.id}`, updatedData)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    toast.success('Campaign info updated')
+                    navigate('/dashboard/my-donation-campaign')
+                } else {
+                    toast.error('Failed to update')
+                }
+            })
+            .catch(err => toast.error('Something wrong happened'))
     }
 
     return (
@@ -60,7 +76,7 @@ const Dash_CreateDonation = () => {
                     </div>
 
                     <div className='mt-10'>
-                        <Input {...register("image")} size="lg" type="file" color="purple" label="Pet picture" accept="image/*" required
+                        <Input {...register("image")} size="lg" type="file" color="purple" label="Pet picture" accept="image/*"
                             className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
                     </div>
 
@@ -82,12 +98,11 @@ const Dash_CreateDonation = () => {
 
                     <br />
                     <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                        {createLoading ? 'Submiting' : 'Submit'} </Button></button>
+                        {createLoading ? 'Updating' : 'Update'} </Button></button>
                 </form>
             </div>
-
         </div>
     );
 };
 
-export default Dash_CreateDonation;
+export default Dash_Update_Campaign;

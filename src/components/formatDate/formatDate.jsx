@@ -10,12 +10,12 @@ function formatDate(dateTimeString, datestring) {
     hours = hours % 12 || 12;
     let date = ""
 
-    if (dateTimeString !== "") {
-        date = `${hours}.${minutes} ${ampm} / ${day} ${month} ${year}`
-    }
-    else {
+    // if (dateTimeString !== "") {
+    //     date = `${hours}.${minutes} ${ampm} / ${day} ${month} ${year}`
+    // }
+    // else {
         date = `${day} ${month} ${year}`
-    }
+    // }
 
     return date;
 }

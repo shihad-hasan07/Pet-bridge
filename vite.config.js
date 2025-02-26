@@ -10,4 +10,5 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@headlessui/react', '@heroicons/react'], // Optional
   },
+  
 });
