@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Dash_MyAddedPet = () => {
     const axiosSecure = useAxiosSecure();
-    const navigate=useNavigate()
-    const {myAddedpets,refetch,isLoading}=useMyaddedpet()
+    const navigate = useNavigate()
+    const { myAddedpets, refetch, isLoading } = useMyaddedpet()
 
-    const handleUpdate=(id)=>{
+    const handleUpdate = (id) => {
         navigate(`/dashboard/update-pet/${id}`)
     }
 
@@ -93,7 +93,7 @@ const Dash_MyAddedPet = () => {
                         <img
                             src={row.original.image}
                             alt={`${row.original.name || 'Pet'}`}
-                            className="w-full h-full object-cover rounded-lg"/>
+                            className="w-full h-full object-cover rounded-lg" />
                     </div>
                 )
             },
@@ -118,7 +118,7 @@ const Dash_MyAddedPet = () => {
                 cell: ({ row }) => (
                     <div >
                         <button
-                        onClick={()=>handleUpdate(row.original._id)}
+                            onClick={() => handleUpdate(row.original._id)}
                             className="text-blue-600 ml-4 hover:text-blue-800"
                         ><FaRegEdit></FaRegEdit>
                         </button>
@@ -143,10 +143,15 @@ const Dash_MyAddedPet = () => {
                     <div className=''>
                         {
                             (row.original.adopted)
-                                ? <div><button className='w-full py-3 rounded-lg font-medium bg-blue-gray-300 cursor-not-allowed text-gray-50' disabled>ADOPTED</button></div>
-                                : <div><button onClick={() => makedopted(row.original._id)}
-                                    className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                                        make adopted</Button></button></div>
+                                ? <div>
+                                    <Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium" disabled>
+                                        adopted</Button>
+                                </div>
+                                : <div>
+                                    <button onClick={() => makedopted(row.original._id)}
+                                        className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
+                                            make adopted</Button></button>
+                                </div>
                         }
                     </div>
                 ),

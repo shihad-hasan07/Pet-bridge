@@ -42,10 +42,12 @@ const Signup = () => {
         signup(email, password)
             .then(res => {
                 updateprofile(name, defaultProfileImg)
-                    .then(() => {
+                    .then((response) => {
+                        
                         const userInfo = {
                             name: res.user.displayName,
                             email: res.user.email,
+                            image:defaultProfileImg,
                             role: 'user'
                         }
                         axioxPublic.post('/create-user', userInfo)

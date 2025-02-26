@@ -78,7 +78,7 @@ const Dash_MyDonationCampaign = () => {
 
             {
                 accessorKey: 'maxDonationAmount',
-                header: 'Max Donation-amount',
+                header: 'Donation-needed',
                 cell: ({ row }) => (
                     <div>
                         {row.original.maxDonationAmount} tk

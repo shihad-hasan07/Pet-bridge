@@ -7,16 +7,14 @@ import useAxiosSecure from "./useAxiosSecure";
 const useAllpets = (id) => {
     const axiosSecure = useAxiosSecure()
 
-
     const { data: allpets = [], refetch, isLoading } = useQuery({
         queryKey: ['allpet'],
         queryFn: async () => {
-            const res=await axiosSecure.get('add-pet')
+            const res = await axiosSecure.get('/all-pets')
+            return res.data
         }
     })
-
-
-    return
+    return { allpets, refetch, isLoading }
 };
 
 export default useAllpets;

@@ -19,9 +19,9 @@ import Admin_all_users from "../pages/Dashboard/Admin_all_users";
 import Admin_All_Pets from "../pages/Dashboard/Admin_All_Pets";
 import Admin_All_Donations from "../pages/Dashboard/Admin_All_Donations";
 import Dash_UpdatePet from "../pages/Dashboard/Dash_UpdatePet";
-import PaginationDemo from "../pages/Dashboard/PaginationDemo";
 import Dash_Update_Campaign from "../pages/Dashboard/Dash_Update_Campaign";
 import CampaignDetails from "../pages/Donation-campaign/CampaignDetails";
+import Admin_UpdatePet from "../pages/Dashboard/Admin_UpdatePet";
 
 const allroutes = createBrowserRouter([
     {
@@ -81,6 +81,11 @@ const allroutes = createBrowserRouter([
                 element: <Admin_All_Pets></Admin_All_Pets>
             },
             {
+                path: `/dashboard/admin/update-pet/:id`,
+                element: <PrivateRoute>
+                    <Admin_UpdatePet></Admin_UpdatePet></PrivateRoute>
+            },
+            {
                 path: '/dashboard/admin/all-donations',
                 element: <Admin_All_Donations></Admin_All_Donations>
             },
@@ -133,10 +138,6 @@ const allroutes = createBrowserRouter([
                 path: '/dashboard/my-donation',
                 element: <PrivateRoute>
                     <Dash_MyDonation></Dash_MyDonation></PrivateRoute>
-            },
-            {
-                path: '/dashboard/pagination',
-                element: <PaginationDemo></PaginationDemo>
             }
         ]
     }

@@ -8,6 +8,7 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAllpets from '../../hooks/useAllpets';
 
 
 const customStyles = {
@@ -46,17 +47,18 @@ const hostingKey = import.meta.env.VITE_imgHostingKey;
 const imgHostingApi = `https://api.imgbb.com/1/upload?key=${hostingKey}`
 
 // main function starts from here.......
-const Dash_UpdatePet = () => {
+const Admin_UpdatePet = () => {
     const params = useParams()
-    console.log(params);
-    const { myAddedpets } = useMyaddedpet()
-    const updatePet = myAddedpets.find(data => data._id === params.id)
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
+
+    const { allpets, refetch } = useAllpets()
+
+    const updatePet = allpets.find(data => data._id === params.id)
     const defaultCategory = category.find(d => d.value == updatePet?.category)
     const [categrie, setCategory] = useState(defaultCategory)
 
-    const [loadding,setloadding]=useState(false)
+    const [loadding, setloadding] = useState(false)
 
     const { register, handleSubmit } = useForm();
 
@@ -89,7 +91,8 @@ const Dash_UpdatePet = () => {
                     if (res.data) {
                         setloadding(false)
                         toast.success('Pet Updated')
-                        navigate('/dashboard/my-added-pets')
+                        refetch()
+                        navigate("/dashboard/admin/all-pets")
                     }
                 })
                 .catch(() => {
@@ -115,7 +118,7 @@ const Dash_UpdatePet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required defaultValue={updatePet?.name}/>
+                        <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required defaultValue={updatePet?.name} />
                     </div>
 
                     <div className='mt-7'>
@@ -127,24 +130,24 @@ const Dash_UpdatePet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("location")} size="lg" type="text" color="purple" label="Location" required defaultValue={updatePet?.location}/>
+                        <Input {...register("location")} size="lg" type="text" color="purple" label="Location" required defaultValue={updatePet?.location} />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required defaultValue={updatePet?.sortDescription}/>
+                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required defaultValue={updatePet?.sortDescription} />
                     </div>
 
                     <div className='mt-7'>
-                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required defaultValue={updatePet?.fullDesciption}/>
+                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required defaultValue={updatePet?.fullDesciption} />
                     </div>
 
                     <br />
                     <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                       {loadding?"Updating...":"Update"} </Button></button>
+                        {loadding ? "Updating..." : "Update"} </Button></button>
                 </form>
             </div>
         </div>
     );
 };
 
-export default Dash_UpdatePet;
+export default Admin_UpdatePet;

@@ -8,10 +8,12 @@ import { IoHomeOutline } from 'react-icons/io5';
 import asideBg from '../../assets/bg1.jpeg'
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { FaDonate, FaUsers } from 'react-icons/fa';
+import useCheckAdmin from '../../hooks/useCheckAdmin';
 
-const UserAside = ({user}) => {
+const UserAside = ({ user }) => {
+    const { checkAdmin } = useCheckAdmin()
 
-    const role = "admin";
+    console.log('checkAdmin', checkAdmin);
 
     return (
         <aside style={{ backgroundImage: `url(${asideBg})` }} className='w-72 '>
@@ -25,10 +27,10 @@ const UserAside = ({user}) => {
                     <p className='text-[#1dca83] pl-5'>Online</p>
                 </div>
             </div>
-            <p className=' pt-5 pl-5 pb-2  text-white text-xl'>{role === 'admin' ? 'Admin' : 'General'}</p>
+            <p className=' pt-5 pl-5 pb-2  text-white text-xl'>{checkAdmin === 'admin' ? 'Admin' : 'User'}</p>
 
             {
-                role === "admin"
+                checkAdmin === "admin"
                     ? <div className='p-1'>
                         <NavLink to='/dashboard/admin/all-users' className={({ isActive }) => isActive ? 'transition-all duration-300 flex items-center bg-blue-900 text-white py-3 rounded-md pl-7 gap-3 w-full text-left'
                             : 'flex bg-none text-gray-300 gap-3 w-full pl-4 text-left hover:bg-[#1a245f] py-3 rounded-md'}>

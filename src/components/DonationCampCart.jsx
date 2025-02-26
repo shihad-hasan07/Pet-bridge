@@ -11,7 +11,7 @@ const DonationCampCart = ({ data }) => {
             <div className='bg-green-100 relative -mt-7 p-6' style={{ borderRadius: "70% 70% 5% 5% / 18% 18% 10% 10%" }}>
                 <p className='text-blue-900  font-semibold text-xl first-letter:uppercase text-center'>{data?.name}</p>
                 <div className='my-2 text-center'>
-                    <p>Max Donation : {data?.maxDonationAmount} tk</p>
+                    <p>Donation Needed : {data?.maxDonationAmount} tk</p>
                     <p className='py-1'>Total Donation : {data?.totalDonation} tk</p>
                 </div>
                 <Link to={`/donation-campaign-details/${data._id}`}>

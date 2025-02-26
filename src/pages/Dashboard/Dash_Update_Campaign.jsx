@@ -81,7 +81,7 @@ const Dash_Update_Campaign = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("maxDonationAmount")} size="lg" type='number' min={1} color="purple" label="Max donation amount" required />
+                        <Input {...register("maxDonationAmount")} size="lg" type='number' min={1} color="purple" label="Donation needed" required />
                     </div>
 
                     <div className='mt-7'>
