@@ -55,7 +55,7 @@ const Header = () => {
                                                 <MenuButton as='div'>
                                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                                                         <img className="w-11 h-11 rounded-full" src={user?.photoURL} alt="user photo" />
-                                                        
+
                                                     </button>
                                                 </MenuButton>
                                             </div>
@@ -151,6 +151,8 @@ const Header = () => {
                     </div>
                 </div>
             </nav>
+
+          
         </div>
     );
 };

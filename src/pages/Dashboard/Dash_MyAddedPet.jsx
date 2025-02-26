@@ -93,11 +93,7 @@ const Dash_MyAddedPet = () => {
                         <img
                             src={row.original.image}
                             alt={`${row.original.name || 'Pet'}`}
-                            className="w-full h-full object-cover rounded-lg"
-                            onError={(e) => {
-                                e.target.src = 'https://placeholder.com/150'; // Your fallback image
-                            }}
-                        />
+                            className="w-full h-full object-cover rounded-lg"/>
                     </div>
                 )
             },

@@ -17,7 +17,7 @@ const Dash_CreateDonation = () => {
     const { register, handleSubmit } = useForm()
     const currentDate = date.toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
     const [createLoading, setCreateLoading] = useState(false)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const onSubmit = async (data) => {
         setCreateLoading(true)
@@ -30,7 +30,13 @@ const Dash_CreateDonation = () => {
         if (res.data.success) {
             const display_url = res.data.data.display_url
             const campaignCreatedTime = new Date().toLocaleString();
-            const campaignData = { ...data, image: display_url, campaignCreatedTime: campaignCreatedTime, campaignOwner: user?.email,totalDonation:0 }
+            const campaignData = {
+                ...data, image: display_url,
+                campaignCreatedTime: campaignCreatedTime,
+                campaignOwner: user?.email,
+                totalDonation: 0,
+                pauseDonation: false,
+            }
 
             axiosSecure.post('/donation-campaign', campaignData)
                 .then(res => {

@@ -80,16 +80,18 @@ const CheckoutForm = ({ donateBalance, id, refetch, setModalIsOpen, details }) =
                     .then(res => {
                         const donationHistory = {
                             transactionId: paymentIntent.id,
+                            petName: details?.name,
+                            petImage: details?.image,
                             donatorDetails: {
-                                name: user.displayName,
-                                email: user.email,
-                                image: user.photoURL,
-                                donationAmount: paymentIntent.amount / 100,
+                                name: user?.displayName,
+                                email: user?.email,
+                                image: user?.photoURL,
+                                donationAmount: paymentIntent?.amount / 100,
                                 donationTime: new Date().toISOString()
                             },
                             donationRequestorInfo: {
                                 campaignID: details._id,
-                                name: details.campaignOwner
+                                name: details?.campaignOwner
                             }
                         }
                         axiosSecure.post('/donation-history', donationHistory)
