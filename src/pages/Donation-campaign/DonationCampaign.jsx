@@ -4,6 +4,7 @@ import DonationCampCart from '../../components/DonationCampCart';
 
 const DonationCampaign = () => {
     const {myDonationCampaign}=useDonationCampagin()
+    console.log('cmap',myDonationCampaign);
 
     return (
         <div>

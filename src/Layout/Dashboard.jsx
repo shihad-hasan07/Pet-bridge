@@ -9,12 +9,12 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import UserAside from '../components/Dash_Components/UserAside';
 
 const Dashboard = () => {
-    const { user } = useContext(allContext)
+    const { user,logOut } = useContext(allContext)
 
     return (
         <div className='flex items-stretch'>
             <div className='min-h-screen' style={{ backgroundImage: `url(${asideBg})` }}>
-                <UserAside user={user} ></UserAside>
+                <UserAside user={user}></UserAside>
             </div>
 
             <div className='flex-grow '>
@@ -44,7 +44,7 @@ const Dashboard = () => {
                                     <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Setting</button>
                                 </MenuItem>
                                 <MenuItem>
-                                    <button className="w-full text-left  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex  gap-1">Log Out <IoLogOutOutline size={17} /></button>
+                                    <button onClick={()=>logOut()} className="w-full text-left  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex  gap-1">Log Out <IoLogOutOutline size={17} /></button>
                                 </MenuItem>
                             </div>
                         </MenuItems>

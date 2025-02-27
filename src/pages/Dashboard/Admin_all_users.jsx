@@ -28,6 +28,7 @@ const Admin_all_users = () => {
                         showConfirmButton: false,
                         timer: 1000
                     });
+                    refetch()
                 }
             })
             .catch(err => toast.error('Something wrong happen'))
