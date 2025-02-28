@@ -8,6 +8,7 @@ import { RiPauseFill } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
+import ProgressBar from '@ramonak/react-progress-bar';
 
 const Admin_All_Donations = () => {
     const axiosSecure = useAxiosSecure()
@@ -70,10 +71,16 @@ const Admin_All_Donations = () => {
                     <tbody>
                         {donators.map((user, index) => (
                             <tr key={user._id} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-
+                                {console.log(user)}
                                 <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
                                 <td className="border border-gray-300 px-4 py-2 text-center">{user.name}</td>
-                                <td className="border border-gray-300 px-4 py-2 text-center">  progess  </td>
+                                <td className="border border-gray-300 px-4 py-2 text-center">
+                                    <div className='relative text-gray-600'>
+                                        <ProgressBar
+                                            isLabelVisible={true}
+                                            completed={((user.totalDonation / user.maxDonationAmount) * 100).toFixed(1)} maxCompleted={100} />
+                                    </div>
+                                </td>
                                 <td className="border border-gray-300 px-4 py-2 text-center">{user.campaignOwner}</td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     <div className='flex justify-center'>
