@@ -3,23 +3,31 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import formatDate from "./formatDate/formatDate";
 import { Button } from "@material-tailwind/react";
+import Loading from "../shared/Loading";
+import Modal from 'react-modal';
+import { useState } from "react";
+import AdoptionRequest from "../pages/pet-listing/AdoptionRequest";
 
 const PetDetails = () => {
     const param = useParams()
     const axiosSecure = useAxiosSecure()
-    const { data: details = [], isLoading, isError, error } = useQuery({
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const { data: details = [], refetch, isLoading, isError, error } = useQuery({
         queryKey: [`pet-details`, param],
         queryFn: async () => {
             const res = await axiosSecure.get(`/pet-details/${param.id}`)
             return res.data
         }
     })
-    if (isLoading) return <p className="text-7xl bg-blue-800 w-full">Loading...</p>;
+
+    if (isLoading) return <p className="min-h-[calc(100vh-393px)]"><Loading></Loading></p>;
     if (isError) return <p>Error: {error.message}</p>;
+
     const { adopted, age, category, fullDesciption, image, location, name, petAddTime, petOwner, sortDescription, _id } = details
 
     return (
-        <div className=" p-20">
+        <div className=" p-20 min-h-[calc(100vh-393px)]">
 
             <div className="container mx-auto rounded-xl">
                 <div className="bg-black">
@@ -30,7 +38,7 @@ const PetDetails = () => {
 
                     <div className="flex justify-between">
                         <p className="text-5xl font-semibold ">{name}</p>
-                        <Button color="blue" className='px-8 py-3 rounded-3xl border-2 border-[#3f83f8] text-sm flex items-center' >
+                        <Button onClick={() => setModalIsOpen(true)} color="blue" className='px-8 py-3 rounded-3xl border-2 border-[#3f83f8] text-sm flex items-center' >
                             Adopt</Button>
                     </div>
 
@@ -47,6 +55,11 @@ const PetDetails = () => {
                     </div>
                 </div>
             </div>
+
+            <Modal isOpen={modalIsOpen} ariaHideApp={true} contentLabel="Donation Modal" overlayClassName="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center"
+                className="bg-white p-6 w-96 rounded-lg shadow-lg  mx-auto" >
+                <AdoptionRequest details={details} setModalIsOpen={setModalIsOpen}></AdoptionRequest>
+            </Modal>
         </div>
     );
 };

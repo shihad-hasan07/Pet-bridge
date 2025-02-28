@@ -107,7 +107,7 @@ const Dash_MyAddedPet = () => {
                 cell: ({ row }) => (
                     <div className='relative text-gray-600'>
                         {
-                            row.original.adopted ? "Adopted" : "Not adopted"
+                            row.original.adopted ? <p className='text-blue-900 font-semibold'>Adopted</p> : "Not adopted"
                         }
                     </div>
                 )

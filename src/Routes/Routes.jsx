@@ -35,11 +35,15 @@ const allroutes = createBrowserRouter([
             },
             {
                 path: '/pet-listing',
-                element: <PetListing></PetListing>
+                element: <PrivateRoute>
+                    <PetListing></PetListing>
+                </PrivateRoute>
             },
             {
                 path: `/pet/details/:id`,
-                element: <PetDetails></PetDetails>
+                element: <PrivateRoute>
+                    <PetDetails></PetDetails>
+                </PrivateRoute>
             },
             {
                 path: '/donation-campaigns',
@@ -50,7 +54,8 @@ const allroutes = createBrowserRouter([
             {
                 path: `/donation-campaign-details/:id`,
                 element: <PrivateRoute>
-                    <CampaignDetails></CampaignDetails> </PrivateRoute>
+                    <CampaignDetails></CampaignDetails>
+                </PrivateRoute>
             },
             {
                 path: '/login',

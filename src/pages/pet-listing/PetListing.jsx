@@ -20,9 +20,12 @@ const PetListing = () => {
 
     useEffect(() => {
         if (selectedCategory === "allCategory") {
-            setpets(allpets); // Show all pets when "All category" is selected
+            const sortedPets = allpets.sort((a, b) => new Date(b.petAddTime) - new Date(a.petAddTime));
+
+            setpets(sortedPets); // Show all pets when "All category" is selected
         } else {
-            const categoryBasedData = allpets.filter(e => e.category === selectedCategory);
+            const sortedPets = allpets.sort((a, b) => new Date(b.petAddTime) - new Date(a.petAddTime));
+            const categoryBasedData = sortedPets.filter(e => e.category === selectedCategory);
             setpets(categoryBasedData);
         }
     }, [selectedCategory, allpets]);
