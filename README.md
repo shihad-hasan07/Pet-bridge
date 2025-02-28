@@ -6,7 +6,7 @@ This is a MERN stack-based pet adoption platform that connects pet lovers with p
 
 ## Live Site
 
-[Live Demo](#) (Replace with your actual deployed link)
+[Live Demo](#) (https://pet-bridge.web.app)
 
 ## Features
 
@@ -85,8 +85,8 @@ This is a MERN stack-based pet adoption platform that connects pet lovers with p
 
 ## Deployment
 
-- **Frontend:** Vercel / Netlify
-- **Backend:** Render / Railway / Heroku
+- **Frontend:** Firebae hosting
+- **Backend:** Vercel
 - **Database:** MongoDB Atlas
 
 ---
