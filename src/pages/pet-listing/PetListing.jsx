@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 const PetListing = () => {
     const axiosSecure = useAxiosSecure()
     const [pets, setpets] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState("allCategory");
+    
+    // this params extracts quesry form url 
+    const queryParams = new URLSearchParams(location.search);
+    const initialCategory = queryParams.get("category") || "allCategory";
+
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchItem, setSearchItem] = useState('')
     const { data: allpets = [], refetch, isLoading } = useQuery({
         queryKey: ['allpets',],
@@ -34,7 +39,7 @@ const PetListing = () => {
     }, [])
 
     const filterdItem = pets?.filter(data => data.name.toLowerCase().includes(searchItem.toLowerCase()))
-    console.log(filterdItem);
+    // console.log(filterdItem);
 
     // console.log(pets);
     return (
