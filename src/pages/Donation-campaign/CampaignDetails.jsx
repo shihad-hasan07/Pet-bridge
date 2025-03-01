@@ -27,24 +27,28 @@ const CampaignDetails = () => {
         }
     })
 
-    const { lastDateofDonation, maxDonationAmount, totalDonation } = details;
+    const { lastDateofDonation, maxDonationAmount, totalDonation, pauseDonation } = details;
     const [baseError, setbaseError] = useState('')
     const date = new Date().toISOString().split("T")[0];
 
 
     useEffect(() => {
+        if (pauseDonation) {
+            setbaseError('Donation paused by user');
+            return
+        }
 
         if (lastDateofDonation < date) {
             setbaseError('Time over');
             return;
         }
-        
+
         if ((maxDonationAmount - totalDonation) < (donateBalance / 100)) {
             setbaseError('Donation limit exceeded');
             return;
         }
 
-        if (donateBalance < 50 ||  donateBalance > 999999.99) {
+        if (donateBalance < 50 || donateBalance > 999999.99) {
             setbaseError('Donation amount should be 50 paisa to  9999999.99 ');
             return;
         }
@@ -78,7 +82,7 @@ const CampaignDetails = () => {
                         <p className='font-semibold text-xl'>Collected amount : <span className='text-xl font-medium'>{details?.totalDonation} tk</span> </p>
                         <p>Creator : {details?.campaignOwner}</p>
                     </div>
-                    <ProgressBar  completed={((details?.totalDonation / details?.maxDonationAmount) * 100).toFixed(2)} className='mt-2 mx-3 border-2 border-[#6a1b9a] rounded-full' maxCompleted={100} />
+                    <ProgressBar completed={((details?.totalDonation / details?.maxDonationAmount) * 100).toFixed(2)} className='mt-2 mx-3 border-2 border-[#6a1b9a] rounded-full' maxCompleted={100} />
                     <p className='font-semibold text-xl mt-2'>Dontion's last date: <span className='font-medium text-xl'>{formatDate((details?.lastDateofDonation))}</span></p>
 
                     <div className='md:flex gap-2 font-semibold text-xl mt-2'><span>Description:</span> <p className='pl-2 md:pl-0 text-lg first-letter:capitalize font-normal'>ssss{details?.fullDesciption}</p></div>
@@ -92,7 +96,7 @@ const CampaignDetails = () => {
                     <p className='text-red-900 mt-1 ml-3 '>{(maxDonationAmount == totalDonation) ? 'Donation completed...' : '' || baseError}</p>
                     <div className='mt-4'>
                         <Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium" onClick={() => setModalIsOpen(true)}
-                            disabled={baseError ? true : false || maxDonationAmount == totalDonation || donateBalance==undefined}>
+                            disabled={baseError ? true : false || maxDonationAmount == totalDonation || donateBalance == undefined}>
                             Donate now</Button>
                     </div>
                 </div>

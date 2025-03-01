@@ -5,9 +5,22 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 
+const petCategories = [
+    { name: "Cat", image: "../../../public/home-category-logo/cat.png" },
+    { name: "Dog", image: "../../../public/home-category-logo/dog.png" },
+    { name: "Rabbit", image: "../../../public/home-category-logo/rabbit.png" },
+    { name: "Horse", image: "../../../public/home-category-logo/horse.png" },
+    { name: "Fish", image: "../../../public/home-category-logo/fish.png" },
+];
 const Home = () => {
+    const navigate = useNavigate()
 
+    const handleCategoryClick = (category) => {
+        console.log(category);
+        navigate(`/pet-listing?category=${category}`);
+    };
 
     return (
         <div>
@@ -44,7 +57,21 @@ const Home = () => {
 
             {/* <----------------pets category section------------> */}
             <section className='bg-gray-100'>
+                <div className="border border-black">
+                    {/* <h2 className="text-xl font-bold mb-4">Pet Categories</h2> */}
+                    <div className="container mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+                        {petCategories.map((category) => (
+                            <div key={category.name}
+                                className="cursor-pointer p-4 border  rounded-lg shadow-md hover:shadow-lg transition"
+                                onClick={() => handleCategoryClick(category.name)}>
 
+                                <img src={category.image} alt={category.name}
+                                    className="w-full h-28 object-contain rounded-md" />
+                                <p className="text-center font-semibold mt-2 text-xl">{category.name}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </section>
 
             {/* about us section */}

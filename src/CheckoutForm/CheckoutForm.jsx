@@ -150,7 +150,7 @@ const CheckoutForm = ({ donateBalance, id, refetch, setModalIsOpen, details }) =
                         Pay
                     </button>
                     : <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-blue-100 ">
-                        loading...
+                        Processing...
                     </button>}
         </form>
     );

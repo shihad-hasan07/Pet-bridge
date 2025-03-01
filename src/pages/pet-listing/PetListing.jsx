@@ -8,7 +8,6 @@ const PetListing = () => {
     const [pets, setpets] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("allCategory");
     const [searchItem, setSearchItem] = useState('')
-
     const { data: allpets = [], refetch, isLoading } = useQuery({
         queryKey: ['allpets',],
         queryFn: async () => {
