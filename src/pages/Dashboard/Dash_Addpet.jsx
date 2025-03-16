@@ -112,7 +112,7 @@ const Dash_Addpet = () => {
                     <div className='mt-10'>
                         <Input {...register("image")} size="lg" type="file" color="purple" label="Select Profile picture" required
                             accept="image/*"
-                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 dark:text-white' />
+                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 text-white' />
                     </div>
 
                     <div className='mt-7'>
@@ -132,7 +132,7 @@ const Dash_Addpet = () => {
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("sortDescription")} className='dark:text-white'  size="lg" type="text" className='h-12' color="purple" label="Sort description" required />
+                        <Input {...register("sortDescription")} className='dark:text-white'  size="lg" type="text"  color="purple" label="Sort description" required />
                     </div>
 
                     <div className='mt-7'>

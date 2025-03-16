@@ -12,10 +12,18 @@ import { IoMenuSharp } from 'react-icons/io5';
 const Header = () => {
     const { user, logOut } = useContext(allContext)
 
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        return localStorage.getItem("theme") === "dark";
+    });
+
     const handleThemeToggle = () => {
-        setIsDarkMode((prevMode) => !prevMode);
+        setIsDarkMode((prevMode) => {
+            const newMode = !prevMode;
+            localStorage.setItem("theme", newMode ? "dark" : "light");
+            return newMode;
+        });
     };
+
     useEffect(() => {
         const root = document.documentElement;
         if (isDarkMode) {
@@ -155,7 +163,7 @@ const Header = () => {
                 </div>
             </nav>
 
-          
+
         </div>
     );
 };
