@@ -22,7 +22,6 @@ const Dash_Update_Campaign = () => {
     const currentDate = date.toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
     const [createLoading, setCreateLoading] = useState(false)
 
-
     const { register, handleSubmit } = useForm({
         defaultValues: {
             name: editCampaign?.name,
@@ -32,12 +31,12 @@ const Dash_Update_Campaign = () => {
             fullDesciption: editCampaign?.fullDesciption
         }
     })
-    const onSubmit = async (data) => {
 
+    const onSubmit = async (data) => {
         let picture = editCampaign?.image
         const imgFile = { image: data.image[0] }
 
-        // if image exist then upload the image to imgbb 
+        // if image exists, upload the image to imgbb 
         if (imgFile?.image?.name) {
             const res = await axios.post(imgHostingApi, imgFile, {
                 headers: { 'content-Type': 'multipart/form-data' }
@@ -46,7 +45,7 @@ const Dash_Update_Campaign = () => {
                 const display_url = res.data.data.display_url
                 picture = display_url
             } else {
-                toast.error('Failed to add')
+                toast.error('Failed to add image')
             }
         }
 
@@ -61,44 +60,47 @@ const Dash_Update_Campaign = () => {
                     toast.error('Failed to update')
                 }
             })
-            .catch(err => toast.error('Something wrong happened'))
+            .catch(err => toast.error('Something went wrong'))
     }
 
     return (
-        <div className='bg-gray-200 min-h-[calc(100vh-60px)]'>
-            <p className='bg-white py-4 shadow-sm px-7 tracking-wider font-semibold  text-xl flex items-center'>Create Donation Campaign</p>
+        <div className='bg-[#424242] min-h-[calc(100vh-60px)] text-white'>
+            <p className='bg-[#212121] py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center'>Update Donation Campaign</p>
 
             <div className='w-96 mx-auto'>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className='mt-7'>
-                        <Input {...register("name")} size="lg" type='text' color="purple" label="Pet name" required />
+                        <Input {...register("name")} size="lg" type='text' color="purple" label="Campaign Name" required className="bg-[#333333] text-white border-[#444444]" />
                     </div>
 
                     <div className='mt-10'>
-                        <Input {...register("image")} size="lg" type="file" color="purple" label="Pet picture" accept="image/*"
-                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
+                        <Input {...register("image")} size="lg" type="file" color="purple" label="Campaign Image" accept="image/*"
+                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full bg-[#333333] text-white border-[#444444]' />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("maxDonationAmount")} size="lg" type='number' min={1} color="purple" label="Donation needed" required />
+                        <Input {...register("maxDonationAmount")} size="lg" type='number' min={1} color="purple" label="Donation Needed" required className="bg-[#333333] text-white border-[#444444]" />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("lastDateofDonation")} size="lg" type='date' color="purple" label="Last date of donation" required min={currentDate} />
+                        <Input {...register("lastDateofDonation")} size="lg" type='date' color="purple" label="Last Date of Donation" required min={currentDate} className="bg-[#333333] text-white border-[#444444]" />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required />
+                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12 bg-[#333333] text-white border-[#444444]' color="purple" label="Short Description" required />
                     </div>
 
                     <div className='mt-7'>
-                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required />
+                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full Description" required className="bg-[#333333] text-white border-[#444444]" />
                     </div>
 
                     <br />
-                    <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                        {createLoading ? 'Updating' : 'Update'} </Button></button>
+                    <button className='w-full'>
+                        <Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
+                            {createLoading ? 'Updating...' : 'Update'}
+                        </Button>
+                    </button>
                 </form>
             </div>
         </div>

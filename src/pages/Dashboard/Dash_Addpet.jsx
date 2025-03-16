@@ -11,27 +11,29 @@ import { allContext } from '../../authprovider/Authprovider';
 const customStyles = {
     control: (provided) => ({
         ...provided,
-        backgroundColor: "rgb(238, 238, 238)", // Tailwind 'bg-gray-200'
+        backgroundColor: "rgb(34, 34, 34)", // Dark background
         borderRadius: "0.5rem", // Tailwind 'rounded-lg'
         padding: "0.25rem", // Tailwind 'p-1'
-        borderColor: "rgb(209 213 219)", // Tailwind 'border-gray-300'
+        borderColor: "rgb(75, 85, 99)", // Tailwind 'border-gray-600'
+        color: "white", // White text
         "&:hover": {
-            borderColor: "rgb(156 163 175)", // Tailwind 'hover:border-gray-400'
+            borderColor: "rgb(255, 255, 255)", // Tailwind 'hover:border-gray-300'
         },
     }),
     menu: (provided) => ({
         ...provided,
-        backgroundColor: "rgb(243 244 246)", // Tailwind 'bg-gray-100'
+        backgroundColor: "rgb(51, 51, 51)", // Dark menu background
     }),
     option: (provided, state) => ({
         ...provided,
         backgroundColor: state.isFocused
-            ? "rgb(209 213 219)" // Tailwind 'bg-gray-300'
-            : "rgb(243 244 246)", // Tailwind 'bg-gray-100'
-        color: "rgb(17 24 39)", // Tailwind 'text-gray-900'
+            ? "rgb(75, 85, 99)" // Darker option when focused
+            : "rgb(51, 51, 51)", // Dark background
+        color: "white", // White text
         padding: "0.5rem", // Tailwind 'p-2'
     }),
 };
+
 const category = [
     { value: "Cat", label: "Cat" },
     { value: "Dog", label: "Dog" },
@@ -50,12 +52,11 @@ const Dash_Addpet = () => {
     const [categrie, setCategory] = useState(null)
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    
+
     // addition security --- to avoid adding multiple click to add data
     const [isPetExist, setisPetExist] = useState({})
 
     const onSubmit = async (data) => {
-
         // additional checking --- to avoid adding multiple click to add data
         setisPetExist(data)
         if(isPetExist?.name){
@@ -99,46 +100,47 @@ const Dash_Addpet = () => {
         }
     }
 
-
     return (
-        <div className='bg-gray-200 min-h-[calc(100vh-60px)]'>
-            <p className='bg-white py-4 shadow-sm px-7 tracking-wider font-semibold  text-xl flex items-center'>Add Pet</p>
+        <div className='bg-gray-800 min-h-[calc(100vh-60px)] text-white'>
+            <p className='bg-gray-900 py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center text-white'>
+                Add Pet
+            </p>
 
             <div className='w-96 mx-auto'>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className='mt-10'>
                         <Input {...register("image")} size="lg" type="file" color="purple" label="Select Profile picture" required
-                         accept="image/*" 
-                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 file:h-full ' />
+                            accept="image/*"
+                            className='cursor-pointer file:cursor-pointer file:text-sm file:bg-none file:border-0 dark:text-white' />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("name")} size="lg" type="text" color="purple" label="Name" required />
+                        <Input {...register("name")} className='dark:text-white'  size="lg" type="text" color="purple" label="Name" required />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("age")} size="lg" type="number" min={1} color="purple" label="Age" required />
+                        <Input {...register("age")} className='dark:text-white'  size="lg" type="number" min={1} color="purple" label="Age" required />
+                    </div>
+
+                    <div className='mt-7 dark:text-white'>
+                        <Select isClearable options={category}  onChange={(d) => setCategory(d)} placeholder="Select the category*" styles={customStyles} required />
                     </div>
 
                     <div className='mt-7'>
-                        <Select isClearable options={category} onChange={(d) => setCategory(d)} placeholder="Select the category*" styles={customStyles} required />
+                        <Input {...register("location")} className='dark:text-white'  size="lg" type="text" color="purple" label="Location" required />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("location")} size="lg" type="text" color="purple" label="Location" required />
+                        <Input {...register("sortDescription")} className='dark:text-white'  size="lg" type="text" className='h-12' color="purple" label="Sort description" required />
                     </div>
 
                     <div className='mt-7'>
-                        <Input {...register("sortDescription")} size="lg" type="text" className='h-12' color="purple" label="Sort description" required />
-                    </div>
-
-                    <div className='mt-7'>
-                        <Textarea {...register('fullDesciption')} color="purple" rows={10} label="Full description of the pet*" required />
+                        <Textarea {...register('fullDesciption')} className='dark:text-white' color="purple" rows={10} label="Full description of the pet*" required />
                     </div>
 
                     <br />
-                    <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
+                    <button className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium dark:text-white">
                         Submit</Button></button>
                 </form>
             </div>

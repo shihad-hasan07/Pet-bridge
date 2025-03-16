@@ -1,22 +1,21 @@
 import React, { useContext } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { FaRegEdit, } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { Button } from '@material-tailwind/react';
 import Swal from 'sweetalert2';
 import useMyaddedpet from '../../hooks/useMyaddedpet';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../shared/Loading';
 
 const Dash_MyAddedPet = () => {
     const axiosSecure = useAxiosSecure();
-    const navigate = useNavigate()
-    const { myAddedpets, refetch, isLoading } = useMyaddedpet()
+    const navigate = useNavigate();
+    const { myAddedpets, refetch, isLoading } = useMyaddedpet();
 
     const handleUpdate = (id) => {
-        navigate(`/dashboard/update-pet/${id}`)
-    }
+        navigate(`/dashboard/update-pet/${id}`);
+    };
 
     const makedopted = (id) => {
         Swal.fire({
@@ -26,25 +25,23 @@ const Dash_MyAddedPet = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, make adopoted."
+            confirmButtonText: "Yes, make adopted."
         }).then((result) => {
             if (result.isConfirmed) {
-
-                // update adopted info
                 axiosSecure.patch(`/change/adopted-status/${id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
-                            refetch()
+                            refetch();
                             Swal.fire({
                                 title: "Adopted",
-                                text: "Pet adopted has been updated",
+                                text: "Pet adopted status has been updated",
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
         });
-    }
+    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -57,24 +54,21 @@ const Dash_MyAddedPet = () => {
             confirmButtonText: "Yes, Delete!"
         }).then((result) => {
             if (result.isConfirmed) {
-
-                // update adopted info
                 axiosSecure.delete(`/my-added-pets/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
-                            refetch()
+                            refetch();
                             Swal.fire({
                                 title: "Deleted",
-                                text: "Pet has been Deleted",
+                                text: "Pet has been deleted",
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
         });
+    };
 
-    }
-    // Define columns with the new syntax
     const columns = React.useMemo(
         () => [
             {
@@ -106,9 +100,9 @@ const Dash_MyAddedPet = () => {
                 accessorKey: 'adoption status',
                 header: 'Adoption status',
                 cell: ({ row }) => (
-                    <div className='relative text-gray-600'>
+                    <div className='relative text-gray-400'>
                         {
-                            row.original.adopted ? <p className='text-blue-900 font-semibold'>Adopted</p> : "Not adopted"
+                            row.original.adopted ? <p className='text-blue-500 font-semibold'>Adopted</p> : "Not adopted"
                         }
                     </div>
                 )
@@ -121,8 +115,7 @@ const Dash_MyAddedPet = () => {
                         <button
                             onClick={() => handleUpdate(row.original._id)}
                             className="text-blue-600 ml-4 hover:text-blue-800"
-                        ><FaRegEdit></FaRegEdit>
-                        </button>
+                        ><FaRegEdit /></button>
                     </div>
                 ),
             },
@@ -132,26 +125,25 @@ const Dash_MyAddedPet = () => {
                 cell: ({ row }) => (
                     <button
                         onClick={() => handleDelete(row.original._id)}
-                        className=" text-blue-600 ml-2 hover:text-blue-800"
-                    ><MdOutlineDeleteForever size={20} />
-                    </button>
+                        className="text-red-600 ml-2 hover:text-red-800"
+                    ><MdOutlineDeleteForever size={20} /></button>
                 ),
             },
             {
                 accessorKey: 'adopted',
                 header: 'Change status',
                 cell: ({ row }) => (
-                    <div className=''>
+                    <div>
                         {
                             (row.original.adopted)
                                 ? <div>
                                     <Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium" disabled>
-                                        adopted</Button>
+                                        Adopted</Button>
                                 </div>
                                 : <div>
                                     <button onClick={() => makedopted(row.original._id)}
                                         className='w-full'><Button fullWidth color="blue" ripple={true} className="py-3 rounded-lg font-medium">
-                                            make adopted</Button></button>
+                                            Make Adopted</Button></button>
                                 </div>
                         }
                     </div>
@@ -168,23 +160,45 @@ const Dash_MyAddedPet = () => {
     });
 
     if (isLoading) {
-        return <p className="min-h-[calc(100vh-393px)]"> <Loading /></p>
+        return (
+            <div className="min-h-[calc(100vh-60px)] bg-gray-800 text-white">
+                <div className="animate-pulse">
+                    <div className="p-4">
+                        <div className="w-full h-10 mb-4 bg-gray-600 rounded"></div>
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-6 gap-4">
+                                {[...Array(6)].map((_, index) => (
+                                    <div key={index} className="col-span-1 flex space-x-4">
+                                        <div className="w-16 h-16 bg-gray-600 rounded-full"></div>
+                                        <div className="flex-1 space-y-2">
+                                            <div className="h-4 bg-gray-600 rounded"></div>
+                                            <div className="h-4 bg-gray-600 rounded w-3/4"></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
+
     return (
-        <div className="bg-gray-200 min-h-[calc(100vh-60px)]">
-            <p className="bg-white py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center">
+        <div className="bg-gray-900 min-h-[calc(100vh-60px)] text-white">
+            <p className="bg-gray-800 py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center">
                 My Added Pets <span className='ml-2'>({myAddedpets?.length})</span>
             </p>
 
             <div className="p-4">
-                <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-                    <thead className="bg-gray-50">
+                <table className="w-full bg-gray-700 text-white shadow-md rounded-lg overflow-hidden">
+                    <thead className="bg-gray-800">
                         {table.getHeaderGroups().map(headerGroup => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map(header => (
                                     <th
                                         key={header.id}
-                                        className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+                                        className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
                                     >
                                         {header.isPlaceholder
                                             ? null
@@ -198,13 +212,13 @@ const Dash_MyAddedPet = () => {
                         ))}
                     </thead>
 
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-gray-800 divide-y divide-gray-600">
                         {table.getRowModel().rows.map(row => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map(cell => (
                                     <td
                                         key={cell.id}
-                                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-700"
+                                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-300"
                                     >
                                         {flexRender(
                                             cell.column.columnDef.cell,
