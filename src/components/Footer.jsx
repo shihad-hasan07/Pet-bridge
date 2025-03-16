@@ -12,8 +12,8 @@ const Footer = () => {
                 <div className="container mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
 
                     {/* Left Side - Logo & Description */}
-                    <div className="md:w-1/4">
-                        <img src={logo} alt="Logo" className="h-12 mb-3 invert" />
+                    <div className="md:w-1/4 ">
+                        <Link to='/'> <img src={logo} alt="Logo" className="h-12 mb-3 invert" /></Link>
                         <p className="text-gray-400 text-sm">
                             Let's make world beatiful
                         </p>
@@ -24,28 +24,28 @@ const Footer = () => {
                         <div>
                             <h4 className="text-lg font-semibold mb-2">Useful Links</h4>
                             <ul className="space-y-1 text-gray-400">
-                                <li><Link to="/content" className="hover:text-blue-400">Content</Link></li>
-                                <li><Link to="/how-it-works" className="hover:text-blue-400">How it Works</Link></li>
-                                <li><Link to="/create" className="hover:text-blue-400">Create</Link></li>
-                                <li><Link to="/explore" className="hover:text-blue-400">Explore</Link></li>
-                                <li><Link to="/terms" className="hover:text-blue-400">Terms & Services</Link></li>
+                                <li><Link className="hover:text-blue-400">Content</Link></li>
+                                <li><Link className="hover:text-blue-400">How it Works</Link></li>
+                                <li><Link className="hover:text-blue-400">Create</Link></li>
+                                <li><Link className="hover:text-blue-400">Explore</Link></li>
+                                <li><Link className="hover:text-blue-400">Terms & Services</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h4 className="text-lg font-semibold mb-2">Community</h4>
                             <ul className="space-y-1 text-gray-400">
-                                <li><Link to="/help-center" className="hover:text-blue-400">Help Center</Link></li>
-                                <li><Link to="/partners" className="hover:text-blue-400">Partners</Link></li>
-                                <li><Link to="/suggestions" className="hover:text-blue-400">Suggestions</Link></li>
-                                <li><Link to="/blog" className="hover:text-blue-400">Blog</Link></li>
-                                <li><Link to="/newsletters" className="hover:text-blue-400">Newsletters</Link></li>
+                                <li><Link className="hover:text-blue-400">Help Center</Link></li>
+                                <li><Link className="hover:text-blue-400">Partners</Link></li>
+                                <li><Link className="hover:text-blue-400">Suggestions</Link></li>
+                                <li><Link className="hover:text-blue-400">Blog</Link></li>
+                                <li><Link className="hover:text-blue-400">Newsletters</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h4 className="text-lg font-semibold mb-2">Partner</h4>
                             <ul className="space-y-1 text-gray-400">
-                                <li><Link to="/our-partner" className="hover:text-blue-400">Our Partner</Link></li>
-                                <li><Link to="/become-partner" className="hover:text-blue-400">Become a Partner</Link></li>
+                                <li><Link className="hover:text-blue-400">Our Partner</Link></li>
+                                <li><Link className="hover:text-blue-400">Become a Partner</Link></li>
                             </ul>
                         </div>
                     </div>

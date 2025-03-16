@@ -61,14 +61,14 @@ const Header = () => {
                                             </div>
 
                                             <MenuItems transition
-                                                className="absolute  right-0 z-50 mt-1 w-44 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                                className="absolute  right-0 z-50 mt-1 w-44 origin-top-right rounded-md bg-white dark:bg-[#424242] ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                                                 <div className="py-1">
                                                     <div className="px-4 py-3">
                                                         <span className="block text-sm text-gray-900 dark:text-white overflow-hidden">{user?.displayName}</span>
                                                     </div>
                                                     <hr />
                                                     <MenuItem>
-                                                        <Link to='/dashboard'><button className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</button></Link>
+                                                        <Link to='/dashboard/user'><button className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</button></Link>
                                                     </MenuItem>
                                                     <MenuItem>
                                                         <button onClick={logout}
@@ -101,27 +101,30 @@ const Header = () => {
                         {/* <----------menu icon show only small device------------> */}
                         <Menu as="div" className="relative md:hidden inline-block text-left ml-56">
                             <div>
-                                <MenuButton as='div' className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
-                                    <IoMenuSharp />
+                                <MenuButton as='div' className="inline-flex w-full justify-center gap-x-1.5 rounded-md dark:text-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ">
+                                    <IoMenuSharp size={26} />
                                 </MenuButton>
                             </div>
 
                             <MenuItems transition
-                                className="absolute  right-0 z-40 mt-1 w-52 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                className="absolute  right-0 z-40 mt-1 w-52 origin-top-right rounded-md bg-white dark:bg-gray-800 
+                                ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 
+                                data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out 
+                                data-leave:duration-75 data-leave:ease-in">
                                 <div className="py-1">
                                     <MenuItem>
-                                        <NavLink to='/' className={({ isActive }) => isActive ? "block px-4 py-2 text-sm bg-blue-700 text-white"
-                                            : "block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                                        <NavLink to='/' className={({ isActive }) => isActive ? "block px-4 py-2 text-sm bg-blue-700 text-white "
+                                            : "block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 data-focus:bg-gray-100 data-focus:text-gray-800 data-focus:outline-hidden"
                                         }>Home</NavLink>
                                     </MenuItem>
                                     <MenuItem>
                                         <NavLink to='/pet-listing' className={({ isActive }) => isActive ? "block px-4 py-2 text-sm bg-blue-700 text-white"
-                                            : "block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                                            : "block px-4 py-2 text-sm text-gray-900 dark:text-gray-200  data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
                                         }>Pet Listings</NavLink>
                                     </MenuItem>
                                     <MenuItem>
                                         <NavLink to='/donation-campaigns' className={({ isActive }) => isActive ? "block px-4 py-2 text-sm bg-blue-700 text-white"
-                                            : "block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                                            : "block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
                                         }>Donation Campaigns</NavLink>
                                     </MenuItem>
                                 </div>

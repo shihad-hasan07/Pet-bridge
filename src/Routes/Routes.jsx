@@ -22,6 +22,7 @@ import Dash_UpdatePet from "../pages/Dashboard/Dash_UpdatePet";
 import Dash_Update_Campaign from "../pages/Dashboard/Dash_Update_Campaign";
 import CampaignDetails from "../pages/Donation-campaign/CampaignDetails";
 import Admin_UpdatePet from "../pages/Dashboard/Admin_UpdatePet";
+import Dash_User from "../pages/Dashboard/Dash_User";
 
 const allroutes = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ const allroutes = createBrowserRouter([
         children: [
 
             // dashboard only for --> admin 
+            {
+                path: '/dashboard/user',
+                element: <Dash_User></Dash_User>
+            },
             {
                 path: '/dashboard/admin/all-users',
                 element: <Admin_all_users></Admin_all_users>

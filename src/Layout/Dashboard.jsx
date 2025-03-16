@@ -38,7 +38,7 @@ const Dashboard = () => {
                             className="absolute  right-0 z-50 w-[179px] origin-top-right rounded-sm bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                             <div className="py-1">
                                 <MenuItem>
-                                    <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My profile</button>
+                                    <Link to='/dashboard/user'><button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My profile</button></Link>
                                 </MenuItem>
                                 <MenuItem>
                                     <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Setting</button>

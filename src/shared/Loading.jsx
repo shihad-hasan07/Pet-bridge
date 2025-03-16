@@ -6,7 +6,7 @@ const Loading = () => {
 
     return (
         <div className="absolute inset-0">
-            <Lottie animationData={loadingLottie} className="w-full h-full" />
+            <Lottie animationData={loadingLottie} className="overflow-hidden -z-20 w-full h-full" />
         </div>
     );
 };

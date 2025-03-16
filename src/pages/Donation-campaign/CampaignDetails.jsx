@@ -59,7 +59,7 @@ const CampaignDetails = () => {
     }, [lastDateofDonation, date, maxDonationAmount, totalDonation, donateBalance]);
 
     return (
-        <div className='dark:bg-blue-gray-800 pb-14 bg-[#edf9fe]'>
+        <div className='dark:bg-[#181818] pb-14 bg-[#edf9fe]'>
             <div className=' py-12 text-black'>
                 <p className='text-3xl font-semibold text-center dark:text-gray-100'>"Be Their Hero – Give Love, Give Hope, Give a Home!"</p>
                 <p className='mt-3 font-medium text-center mx-auto dark:text-gray-100'>"Your generosity can provides food, shelter, and care to homeless pets. <br /> Every donation brings them closer to a loving home!"</p>
@@ -70,7 +70,7 @@ const CampaignDetails = () => {
                     <img src={details.image} className='w-full  object-contain rounded-t-xl h-[550px]' alt="" />
                 </div>
 
-                <div className='bg-gray-200 dark:bg-opacity-60 rounded-b-xl p-6'>
+                <div className='bg-gray-200 dark:bg-[#212121] dark:text-white rounded-b-xl p-6'>
                     <p className='first-letter:capitalize text-5xl text-red-700'>{details?.name}</p>
 
                     <p className='first-letter:capitalize my-2 text-xl'>{details?.sortDescription}</p>
@@ -89,7 +89,7 @@ const CampaignDetails = () => {
 
                     <div className='mt-7'>
                         <Input size="lg" type="number" color="purple" label="Donation amount" required
-                            className='text-3xl'
+                            className='text-3xl dark:text-white'
                             onChange={(e) => setDonateBalance((e.target.value) * 100)} />
                     </div>
 

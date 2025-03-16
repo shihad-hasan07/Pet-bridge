@@ -7,6 +7,7 @@ import { Button } from '@material-tailwind/react';
 import Swal from 'sweetalert2';
 import useMyaddedpet from '../../hooks/useMyaddedpet';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../shared/Loading';
 
 const Dash_MyAddedPet = () => {
     const axiosSecure = useAxiosSecure();
@@ -166,6 +167,9 @@ const Dash_MyAddedPet = () => {
         getCoreRowModel: getCoreRowModel(),
     });
 
+    if (isLoading) {
+        return <p className="min-h-[calc(100vh-393px)]"> <Loading /></p>
+    }
     return (
         <div className="bg-gray-200 min-h-[calc(100vh-60px)]">
             <p className="bg-white py-4 shadow-sm px-7 tracking-wider font-semibold text-xl flex items-center">
