@@ -6,10 +6,10 @@ const AboutUs = () => {
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
                 {/* Image Section */}
                 <div className="w-full grid grid-cols-2 md:w-1/2 gap-1  bg-blue-700 rounded-2xl">
-                    <img src='../../../public/aboutus/fish.jpg' className='w-full h-full rounded-tl-xl' alt="" />
-                    <img src='../../../public/aboutus/cat2.jpg' className='w-full h-full rounded-tr-xl' alt="" />
-                    <img src='../../../public/aboutus/horse.jpeg' className='w-full h-full rounded-bl-xl' alt="" />
-                    <img src='../../../public/aboutus/cat.jpg' className='w-full h-full rounded-br-xl' alt="" />
+                    <img src='aboutus/fish.jpg' className='w-full h-full rounded-tl-xl' alt="" />
+                    <img src='aboutus/cat2.jpg' className='w-full h-full rounded-tr-xl' alt="" />
+                    <img src='aboutus/horse.jpeg' className='w-full h-full rounded-bl-xl' alt="" />
+                    <img src='aboutus/cat.jpg' className='w-full h-full rounded-br-xl' alt="" />
                 </div>
 
                 {/* Text Content Section */}

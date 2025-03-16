@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import PetCard from "../../components/HomeComponents/Petcard";
 import { useEffect, useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Loading from "../../shared/Loading";
 
 const PetListing = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const [pets, setpets] = useState([])
-    
+
     // this params extracts quesry form url 
     const queryParams = new URLSearchParams(location.search);
     const initialCategory = queryParams.get("category") || "allCategory";
@@ -16,9 +17,8 @@ const PetListing = () => {
     const { data: allpets = [], refetch, isLoading } = useQuery({
         queryKey: ['allpets',],
         queryFn: async () => {
-            const res = await axiosSecure.get('/all-pets')
-            const notadopted = res.data.filter(p => p.adopted == false)
-            return notadopted
+            const res = await axiosPublic.get('/all-nonAdopted-pets')
+            return res.data
         }
     })
 
@@ -40,7 +40,7 @@ const PetListing = () => {
 
     const filterdItem = pets?.filter(data => data.name.toLowerCase().includes(searchItem.toLowerCase()))
     // console.log(filterdItem);
-
+    if (isLoading) return <p className="min-h-[calc(100vh-393px)]"><Loading></Loading></p>;
     // console.log(pets);
     return (
         <div className='bg-gray-200 dark:bg-[#3c0040]'>
@@ -59,12 +59,12 @@ const PetListing = () => {
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}>
                     <option value='allCategory' selected >All category</option>
-                    <option value="Cat">Cat</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Rabbit">Rabbit</option>
-                    <option value="Horse">Horse</option>
-                    <option value="Fish">Fish</option>
-                    <option value="Others">Others</option>
+                    <option defaultValue="Cat">Cat</option>
+                    <option defaultValue="Dog">Dog</option>
+                    <option defaultValue="Rabbit">Rabbit</option>
+                    <option defaultValue="Horse">Horse</option>
+                    <option defaultValue="Fish">Fish</option>
+                    <option defaultValue="Others">Others</option>
                 </select>
 
             </div>

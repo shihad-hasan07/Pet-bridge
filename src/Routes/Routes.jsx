@@ -35,9 +35,7 @@ const allroutes = createBrowserRouter([
             },
             {
                 path: '/pet-listing',
-                element: <PrivateRoute>
-                    <PetListing></PetListing>
-                </PrivateRoute>
+                element: <PetListing></PetListing>
             },
             {
                 path: `/pet/details/:id`,
