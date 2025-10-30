@@ -9,7 +9,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import UserAside from '../components/Dash_Components/UserAside';
 
 const Dashboard = () => {
-    const { user,logOut } = useContext(allContext)
+    const { user, logOut } = useContext(allContext)
 
     return (
         <div className='flex items-stretch'>
@@ -34,17 +34,20 @@ const Dashboard = () => {
                                 </div>
                             </MenuButton>
                         </div>
+
                         <MenuItems transition
-                            className="absolute  right-0 z-50 w-[179px] origin-top-right rounded-sm bg-white dark:bg-gray-900 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                            className="absolute  right-0 z-50 w-[179px] origin-top-right rounded-sm bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                             <div className="py-1">
                                 <MenuItem>
-                                    <Link to='/dashboard/user'><button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My profile</button></Link>
+                                    <Link to='/dashboard/user'>
+                                        <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white">My profile</button>
+                                    </Link>
                                 </MenuItem>
                                 <MenuItem>
-                                    <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Setting</button>
+                                    <button className="w-full text-left block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white">Setting</button>
                                 </MenuItem>
                                 <MenuItem>
-                                    <button onClick={()=>logOut()} className="w-full text-left  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex  gap-1">Log Out <IoLogOutOutline size={17} /></button>
+                                    <button onClick={() => logOut()} className="w-full text-left  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white flex  gap-1">Log Out <IoLogOutOutline size={17} /></button>
                                 </MenuItem>
                             </div>
                         </MenuItems>
